@@ -1,76 +1,62 @@
 <p align="center">
   <picture>
-    <source
-      media="(prefers-color-scheme: dark)"
-      srcset="./assets/intro_dark.svg"
-    >
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="./assets/intro_light.svg"
-    >
-    <img
-      src="./assets/intro_dark.svg"
-      width="100%"
-      alt="Mina Liu — Technical Program Manager building agentic AI workflows"
-    >
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/intro_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/intro_light.svg">
+    <img src="./assets/intro_dark.svg" width="100%" alt="Mina Liu — Technical Program Manager building agentic AI workflows">
   </picture>
 </p>
 
-## Focus Areas & Selected Projects
+## Focus Areas
 
-<p align="center">
-  <picture>
-    <source
-      media="(prefers-color-scheme: dark)"
-      srcset="./assets/work_dashboard_dark.svg?v=1"
-    >
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="./assets/work_dashboard_light.svg?v=1"
-    >
-    <img
-      src="./assets/work_dashboard_dark.svg?v=1"
-      width="100%"
-      alt="Mina Liu focus areas and selected AI workflow projects"
-    >
-  </picture>
-</p>
+<table>
+<tr>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/focus_agentic_dark.svg" width="100%" alt="Agentic Workflows">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/focus_automation_dark.svg" width="100%" alt="Automation Systems">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://www.datascienceportfol.io/mina">
+  <img src="./assets/focus_intelligence_dark.svg" width="100%" alt="Operational Intelligence">
+</a>
+</td>
+</tr>
+</table>
 
-<p align="center">
-  <strong>Focus Areas:</strong>
-  <a href="https://github.com/Mina314?tab=repositories">Agentic Workflows</a>
-  ·
-  <a href="https://github.com/Mina314?tab=repositories">Automation Systems</a>
-  ·
-  <a href="https://www.datascienceportfol.io/mina">Operational Intelligence</a>
-</p>
+## Selected Projects
 
-<p align="center">
-  <strong>Projects:</strong>
-  <a href="https://github.com/Mina314/Mina314">GitHub Portfolio Intelligence</a>
-  ·
-  <a href="https://github.com/Mina314?tab=repositories">Agentic Issue Triage</a>
-  ·
-  <a href="https://github.com/Mina314?tab=repositories">Workflow Patterns</a>
-</p>
+<table>
+<tr>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314/Mina314">
+  <img src="./assets/project_portfolio_dark.svg" width="100%" alt="GitHub Portfolio Intelligence — Live">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/project_triage_dark.svg" width="100%" alt="Agentic Issue Triage — In development">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/project_patterns_dark.svg" width="100%" alt="Workflow Patterns — Planned">
+</a>
+</td>
+</tr>
+</table>
 
 ## Portfolio Insights
 
 <p align="center">
   <picture>
-    <source
-      media="(prefers-color-scheme: dark)"
-      srcset="./assets/portfolio_insights_dark.svg?v=1"
-    >
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="./assets/portfolio_insights_light.svg?v=1"
-    >
-    <img
-      src="./assets/portfolio_insights_dark.svg?v=1"
-      width="100%"
-      alt="GitHub portfolio insights"
-    >
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/portfolio_insights_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/portfolio_insights_light.svg">
+    <img src="./assets/portfolio_insights_dark.svg" width="100%" alt="GitHub portfolio insights">
   </picture>
 </p>
 
@@ -78,25 +64,13 @@
 
 <p align="center">
   <picture>
-    <source
-      media="(prefers-color-scheme: dark)"
-      srcset="./assets/activity_dark.svg?v=4"
-    >
-    <source
-      media="(prefers-color-scheme: light)"
-      srcset="./assets/activity_light.svg?v=4"
-    >
-    <img
-      src="./assets/activity_dark.svg?v=4"
-      width="100%"
-      alt="Recent public GitHub activity"
-    >
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/activity_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/activity_light.svg">
+    <img src="./assets/activity_dark.svg?v=3" width="100%" alt="Recent public GitHub activity">
   </picture>
 </p>
 
-<sub>
-Repository insights and activity are refreshed automatically with GitHub Actions.
-</sub>
+<sub>Repository insights and activity are refreshed automatically with GitHub Actions.</sub>
 
 <br><br>
 
