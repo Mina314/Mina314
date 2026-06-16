@@ -107,40 +107,213 @@ def pill(x, y, label, theme):
 def generate_intro(theme):
     uid = f"intro-{theme.name}"
     d = gradients(theme, uid)
+
     body = [
-        box(8, 8, 944, 430, 26, f"url(#{uid}-bg)", theme.border, 1.5),
-        f'<rect x="8" y="8" width="944" height="430" rx="26" fill="url(#{uid}-glow)"/>',
-        txt(52, 82, "Hi, I’m", 34, theme.text, 700),
-        f'<text x="174" y="82" font-family="{FONT}" font-size="34" font-weight="800" fill="url(#{uid}-accent)">Mina.</text>',
-        txt(52, 138, "I build agentic workflows and", 35, theme.text, 700),
-        txt(52, 184, "AI-powered operational systems.", 35, theme.text, 700),
-        txt(52, 229, "Connecting AI, APIs, automation, data, and human review", 16, theme.secondary),
-        txt(52, 254, "to turn operational complexity into clear, reviewable action.", 16, theme.secondary),
+        box(
+            8,
+            8,
+            944,
+            430,
+            26,
+            f"url(#{uid}-bg)",
+            theme.border,
+            1.5,
+        ),
+        (
+            f'<rect x="8" y="8" width="944" height="430" rx="26" '
+            f'fill="url(#{uid}-glow)"/>'
+        ),
+
+        # Keep "Hi, I’m Mina." in one text element so spacing is consistent.
+        (
+            f'<text x="52" y="82" '
+            f'font-family="{FONT}" '
+            f'font-size="34" '
+            f'font-weight="700" '
+            f'fill="{theme.text}">'
+            f'Hi, I’m '
+            f'<tspan font-weight="800" fill="url(#{uid}-accent)">Mina.</tspan>'
+            f'</text>'
+        ),
+
+        txt(
+            52,
+            138,
+            "I build agentic workflows and",
+            35,
+            theme.text,
+            700,
+        ),
+        txt(
+            52,
+            184,
+            "AI-powered operational systems.",
+            35,
+            theme.text,
+            700,
+        ),
+
+        txt(
+            52,
+            229,
+            "Connecting AI, APIs, automation, data, and human review",
+            16,
+            theme.secondary,
+        ),
+        txt(
+            52,
+            254,
+            "to turn operational complexity into clear, reviewable action.",
+            16,
+            theme.secondary,
+        ),
     ]
-    x = 52
-    for label in ["AI Systems", "Workflow Automation", "Operational Intelligence", "Human-in-the-loop"]:
-        body.append(pill(x, 292, label, theme))
-        x += max(96, len(label) * 7 + 28) + 12
 
-    for i, (yy, color) in enumerate([(280, theme.violet), (235, theme.blue), (190, theme.cyan)]):
-        body.append(box(680+i*10, yy, 180, 32, 9, color, color))
-        body.append(f'<rect x="{680+i*10}" y="{yy}" width="180" height="32" rx="9" fill="{color}" opacity=".22"/>')
+    # Use explicit positions and widths so the pills stay in the left content area.
+    intro_pills = [
+        (52, "AI Systems", 104),
+        (168, "Workflow Automation", 164),
+        (344, "Operational Intelligence", 190),
+        (546, "Human-in-the-loop", 160),
+    ]
 
-    nodes = [(638, 312), (742, 335), (858, 304), (884, 165)]
-    for nx, ny in nodes:
-        body.append(f'<circle cx="{nx}" cy="{ny}" r="6" fill="{theme.blue}"/>')
-    for (x1, y1), (x2, y2) in zip(nodes, nodes[1:]):
-        body.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{theme.violet}" opacity=".7"/>')
+    for x, label, width in intro_pills:
+        body.extend([
+            box(
+                x,
+                292,
+                width,
+                34,
+                17,
+                theme.inner,
+                theme.border,
+            ),
+            txt(
+                x + width / 2,
+                314,
+                label,
+                12,
+                theme.secondary,
+                600,
+                "middle",
+            ),
+        ])
 
+    # Move the illustration farther right and keep all lines away from the pills.
+    stack_x = 746
+
+    stack_layers = [
+        (stack_x, 278, 154, theme.violet),
+        (stack_x + 10, 232, 154, theme.blue),
+        (stack_x + 20, 186, 154, theme.cyan),
+    ]
+
+    for x, y, width, color in stack_layers:
+        body.extend([
+            box(
+                x,
+                y,
+                width,
+                32,
+                9,
+                color,
+                color,
+            ),
+            (
+                f'<rect x="{x}" y="{y}" width="{width}" height="32" '
+                f'rx="9" fill="{color}" opacity=".22"/>'
+            ),
+        ])
+
+    # Cards above and beside the stack.
     body.extend([
-        box(752, 92, 60, 52, 13, theme.inner, theme.border),
-        txt(782, 124, "AI", 16, theme.blue, 800, "middle"),
-        box(838, 122, 64, 52, 13, theme.inner, theme.border),
-        txt(870, 154, "</>", 15, theme.violet, 800, "middle"),
-        box(852, 226, 58, 52, 13, theme.inner, theme.border),
-        txt(881, 258, "▥", 22, theme.cyan, 800, "middle"),
+        box(
+            766,
+            84,
+            60,
+            52,
+            13,
+            theme.inner,
+            theme.border,
+        ),
+        txt(
+            796,
+            116,
+            "AI",
+            16,
+            theme.blue,
+            800,
+            "middle",
+        ),
+
+        box(
+            846,
+            116,
+            64,
+            52,
+            13,
+            theme.inner,
+            theme.border,
+        ),
+        txt(
+            878,
+            148,
+            "</>",
+            15,
+            theme.violet,
+            800,
+            "middle",
+        ),
+
+        box(
+            858,
+            220,
+            58,
+            52,
+            13,
+            theme.inner,
+            theme.border,
+        ),
+        txt(
+            887,
+            252,
+            "▥",
+            22,
+            theme.cyan,
+            800,
+            "middle",
+        ),
     ])
-    return render_svg(960, 446, d, "\n".join(body))
+
+    # Keep the workflow nodes and connector lines entirely on the right.
+    nodes = [
+        (722, 318),
+        (792, 338),
+        (878, 310),
+        (902, 166),
+    ]
+
+    for nx, ny in nodes:
+        body.append(
+            f'<circle cx="{nx}" cy="{ny}" r="6" fill="{theme.blue}"/>'
+        )
+
+    for (x1, y1), (x2, y2) in zip(nodes, nodes[1:]):
+        body.append(
+            f'<line '
+            f'x1="{x1}" y1="{y1}" '
+            f'x2="{x2}" y2="{y2}" '
+            f'stroke="{theme.violet}" '
+            f'stroke-width="1.5" '
+            f'opacity=".7"/>'
+        )
+
+    return render_svg(
+        960,
+        446,
+        d,
+        "\n".join(body),
+    )
 
 
 FOCUS = {
