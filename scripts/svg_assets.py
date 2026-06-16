@@ -507,15 +507,35 @@ def generate_activity(data, theme):
 
             detail = item.get("detail", "")
             if detail:
-                body.append(
-                    txt(
-                        70,
-                        y + 28,
-                        detail,
-                        12,
-                        theme.secondary,
+                words = detail.split()
+                lines = []
+                current_line = ""
+
+                for word in words:
+                    candidate = (
+                        f"{current_line} {word}".strip()
                     )
-                )
+
+                    if len(candidate) <= 44:
+                        current_line = candidate
+                    else:
+                        if current_line:
+                            lines.append(current_line)
+                        current_line = word
+
+                if current_line:
+                    lines.append(current_line)
+
+                for line_index, line in enumerate(lines[:2]):
+                    body.append(
+                        txt(
+                            644,
+                            y + 25 + line_index * 16,
+                            line,
+                            10,
+                            theme.secondary,
+                        )
+                    )
 
             body.append(
                 txt(
@@ -540,7 +560,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
     uid = f"insights-activity-{theme.name}"
 
     width = 960
-    height = 410
+    height = 440
 
     contributions = data.get("contributions", {})
     languages = data.get("language_distribution", [])
@@ -558,7 +578,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
             8,
             8,
             570,
-            394,
+            424,
             22,
             f"url(#{uid}-bg)",
             theme.border,
@@ -578,7 +598,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
             592,
             8,
             360,
-            394,
+            424,
             22,
             f"url(#{uid}-bg)",
             theme.border,
@@ -810,7 +830,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
         ]
 
         for index, item in enumerate(activity):
-            y = 94 + index * 73
+            y = 94 + index * 88
             color = activity_colors[index % len(activity_colors)]
 
             body.append(
@@ -821,7 +841,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
                 body.append(
                     f'<line '
                     f'x1="622" y1="{y + 10}" '
-                    f'x2="622" y2="{y + 63}" '
+                    f'x2="622" y2="{y + 78}" '
                     f'stroke="{theme.border}" '
                     f'stroke-width="2"/>'
                 )
