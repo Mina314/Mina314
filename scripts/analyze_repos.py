@@ -514,10 +514,6 @@ def main() -> None:
 
         top_languages = sorted_languages[:4]
 
-        remaining_bytes = sum(
-            amount
-            for _, amount in sorted_languages[4:]
-        )
 
         for language, amount in top_languages:
             language_distribution.append(
@@ -526,18 +522,6 @@ def main() -> None:
                     "bytes": amount,
                     "percentage": round(
                         amount / total_language_bytes * 100,
-                        1,
-                    ),
-                }
-            )
-
-        if remaining_bytes > 0:
-            language_distribution.append(
-                {
-                    "name": "Other",
-                    "bytes": remaining_bytes,
-                    "percentage": round(
-                        remaining_bytes / total_language_bytes * 100,
                         1,
                     ),
                 }

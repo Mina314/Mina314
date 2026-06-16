@@ -543,7 +543,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
     height = 410
 
     contributions = data.get("contributions", {})
-    languages = data.get("language_distribution", [])[:5]
+    languages = data.get("language_distribution", [])
     activity = data.get("activity", [])[:4]
 
     repo_count = data.get("repo_count", 0)
