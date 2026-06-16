@@ -12,20 +12,17 @@
 <tr>
 <td width="33%" valign="top">
 <a href="https://github.com/Mina314?tab=repositories">
-  <img src="./assets/focus_agentic_dark.svg#gh-dark-mode-only" width="100%" alt="Agentic Workflows">
-  <img src="./assets/focus_agentic_light.svg#gh-light-mode-only" width="100%" alt="Agentic Workflows">
+  <img src="./assets/focus_agentic_dark.svg" width="100%" alt="Agentic Workflows">
 </a>
 </td>
 <td width="33%" valign="top">
 <a href="https://github.com/Mina314?tab=repositories">
-  <img src="./assets/focus_automation_dark.svg#gh-dark-mode-only" width="100%" alt="Automation Systems">
-  <img src="./assets/focus_automation_light.svg#gh-light-mode-only" width="100%" alt="Automation Systems">
+  <img src="./assets/focus_automation_dark.svg" width="100%" alt="Automation Systems">
 </a>
 </td>
 <td width="33%" valign="top">
 <a href="https://www.datascienceportfol.io/mina">
-  <img src="./assets/focus_intelligence_dark.svg#gh-dark-mode-only" width="100%" alt="Operational Intelligence">
-  <img src="./assets/focus_intelligence_light.svg#gh-light-mode-only" width="100%" alt="Operational Intelligence">
+  <img src="./assets/focus_intelligence_dark.svg" width="100%" alt="Operational Intelligence">
 </a>
 </td>
 </tr>
@@ -37,20 +34,17 @@
 <tr>
 <td width="33%" valign="top">
 <a href="https://github.com/Mina314/Mina314">
-  <img src="./assets/project_portfolio_dark.svg#gh-dark-mode-only" width="100%" alt="GitHub Portfolio Intelligence — Live">
-  <img src="./assets/project_portfolio_light.svg#gh-light-mode-only" width="100%" alt="GitHub Portfolio Intelligence — Live">
+  <img src="./assets/project_portfolio_dark.svg" width="100%" alt="GitHub Portfolio Intelligence — Live">
 </a>
 </td>
 <td width="33%" valign="top">
 <a href="https://github.com/Mina314?tab=repositories">
-  <img src="./assets/project_triage_dark.svg#gh-dark-mode-only" width="100%" alt="Agentic Issue Triage — In development">
-  <img src="./assets/project_triage_light.svg#gh-light-mode-only" width="100%" alt="Agentic Issue Triage — In development">
+  <img src="./assets/project_triage_dark.svg" width="100%" alt="Agentic Issue Triage — In development">
 </a>
 </td>
 <td width="33%" valign="top">
 <a href="https://github.com/Mina314?tab=repositories">
-  <img src="./assets/project_patterns_dark.svg#gh-dark-mode-only" width="100%" alt="Workflow Patterns — Planned">
-  <img src="./assets/project_patterns_light.svg#gh-light-mode-only" width="100%" alt="Workflow Patterns — Planned">
+  <img src="./assets/project_patterns_dark.svg" width="100%" alt="Workflow Patterns — Planned">
 </a>
 </td>
 </tr>
