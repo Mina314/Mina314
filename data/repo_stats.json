@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-16T06:07:25.057757+00:00",
-  "username": "Mina314",
+  "generated_at": "2026-06-16T06:19:18.900510+00:00",
+  "username": "minazliu",
   "repo_count": 15,
   "language_count": 6,
   "top_language": "Python",
   "language_distribution": [
     {
       "name": "Python",
-      "bytes": 9222349,
+      "bytes": 9222351,
       "percentage": 99.1
     },
     {
@@ -38,17 +38,17 @@
   ],
   "repositories": [
     {
-      "name": "Mina314",
-      "url": "https://github.com/Mina314/Mina314",
+      "name": "minazliu",
+      "url": "https://github.com/minazliu/minazliu",
       "description": null,
       "languages": {
-        "Python": 41937
+        "Python": 41939
       },
-      "pushed_at": "2026-06-16T06:06:02Z"
+      "pushed_at": "2026-06-16T06:17:57Z"
     },
     {
       "name": "uber_data_engineering",
-      "url": "https://github.com/Mina314/uber_data_engineering",
+      "url": "https://github.com/minazliu/uber_data_engineering",
       "description": null,
       "languages": {
         "Jupyter Notebook": 520682
@@ -57,7 +57,7 @@
     },
     {
       "name": "Movie_recommendation_Using_Azure",
-      "url": "https://github.com/Mina314/Movie_recommendation_Using_Azure",
+      "url": "https://github.com/minazliu/Movie_recommendation_Using_Azure",
       "description": null,
       "languages": {
         "Python": 6400
@@ -66,14 +66,14 @@
     },
     {
       "name": "Healthcare-System-Flu-Shots-2022",
-      "url": "https://github.com/Mina314/Healthcare-System-Flu-Shots-2022",
+      "url": "https://github.com/minazliu/Healthcare-System-Flu-Shots-2022",
       "description": null,
       "languages": {},
       "pushed_at": "2023-09-22T05:50:59Z"
     },
     {
       "name": "Video-Processing-Service",
-      "url": "https://github.com/Mina314/Video-Processing-Service",
+      "url": "https://github.com/minazliu/Video-Processing-Service",
       "description": null,
       "languages": {
         "TypeScript": 5960,
@@ -83,7 +83,7 @@
     },
     {
       "name": "Cloud-Based-Real-Time-IoT-Data-Processing-and-Analytics",
-      "url": "https://github.com/Mina314/Cloud-Based-Real-Time-IoT-Data-Processing-and-Analytics",
+      "url": "https://github.com/minazliu/Cloud-Based-Real-Time-IoT-Data-Processing-and-Analytics",
       "description": null,
       "languages": {
         "Python": 8735
@@ -92,7 +92,7 @@
     },
     {
       "name": "Microservices-Based-Fraud-Detection-Application",
-      "url": "https://github.com/Mina314/Microservices-Based-Fraud-Detection-Application",
+      "url": "https://github.com/minazliu/Microservices-Based-Fraud-Detection-Application",
       "description": null,
       "languages": {
         "Java": 6513
@@ -101,7 +101,7 @@
     },
     {
       "name": "flashcards_app",
-      "url": "https://github.com/Mina314/flashcards_app",
+      "url": "https://github.com/minazliu/flashcards_app",
       "description": null,
       "languages": {
         "Python": 10252,
@@ -112,7 +112,7 @@
     },
     {
       "name": "Event-Search-and-Recommendation",
-      "url": "https://github.com/Mina314/Event-Search-and-Recommendation",
+      "url": "https://github.com/minazliu/Event-Search-and-Recommendation",
       "description": null,
       "languages": {
         "Java": 38425,
@@ -124,35 +124,35 @@
     },
     {
       "name": "Netflix-Movie-Recommendation-System-R",
-      "url": "https://github.com/Mina314/Netflix-Movie-Recommendation-System-R",
+      "url": "https://github.com/minazliu/Netflix-Movie-Recommendation-System-R",
       "description": null,
       "languages": {},
       "pushed_at": "2023-08-03T06:19:25Z"
     },
     {
       "name": "Detect-Credit-Card-Fraud-with-Machine-Learning-in-R",
-      "url": "https://github.com/Mina314/Detect-Credit-Card-Fraud-with-Machine-Learning-in-R",
+      "url": "https://github.com/minazliu/Detect-Credit-Card-Fraud-with-Machine-Learning-in-R",
       "description": null,
       "languages": {},
       "pushed_at": "2023-07-17T03:09:36Z"
     },
     {
       "name": "Uber-Data-Analysis-Project---R",
-      "url": "https://github.com/Mina314/Uber-Data-Analysis-Project---R",
+      "url": "https://github.com/minazliu/Uber-Data-Analysis-Project---R",
       "description": null,
       "languages": {},
       "pushed_at": "2021-02-17T19:21:59Z"
     },
     {
       "name": "sentiment-analysis-in-R",
-      "url": "https://github.com/Mina314/sentiment-analysis-in-R",
+      "url": "https://github.com/minazliu/sentiment-analysis-in-R",
       "description": null,
       "languages": {},
       "pushed_at": "2021-02-17T19:16:39Z"
     },
     {
       "name": "COVD-19-Analysis-Visualization-",
-      "url": "https://github.com/Mina314/COVD-19-Analysis-Visualization-",
+      "url": "https://github.com/minazliu/COVD-19-Analysis-Visualization-",
       "description": null,
       "languages": {
         "Jupyter Notebook": 744119
@@ -161,7 +161,7 @@
     },
     {
       "name": "Coronavirus-Bar-Chart-Race",
-      "url": "https://github.com/Mina314/Coronavirus-Bar-Chart-Race",
+      "url": "https://github.com/minazliu/Coronavirus-Bar-Chart-Race",
       "description": "I selected the Top 10 countries with the most cases of coronavirus. I illustrated how the cases are growing in these countries through a bar chart race.",
       "languages": {
         "Jupyter Notebook": 7890224
@@ -170,18 +170,18 @@
     }
   ],
   "contributions": {
-    "commits": 29,
+    "commits": 30,
     "longest_streak": 5,
-    "commits_current_month": 29
+    "commits_current_month": 30
   },
   "activity": [
     {
-      "action": "Updated Mina314",
-      "detail": "29 commits this month \u00b7 Latest: Use adaptive activity text sizing",
-      "created_at": "2026-06-16T06:06:02Z"
+      "action": "Updated minazliu",
+      "detail": "30 commits this month \u00b7 Latest: Update GitHub username to minazliu",
+      "created_at": "2026-06-16T06:17:58Z"
     },
     {
-      "action": "Created branch in Mina314",
+      "action": "Created branch in minazliu",
       "detail": "main",
       "created_at": "2026-06-16T01:34:28Z"
     }
