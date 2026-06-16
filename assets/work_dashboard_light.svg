@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img">
+<defs><linearGradient id="work-dashboard-light-bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#f7f9fc"/><stop offset="100%" stop-color="#ffffff"/></linearGradient><linearGradient id="work-dashboard-light-accent" x1="0" x2="1"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient><radialGradient id="work-dashboard-light-glow" cx="78%" cy="42%" r="48%"><stop offset="0%" stop-color="#2563eb" stop-opacity=".16"/><stop offset="100%" stop-color="#2563eb" stop-opacity="0"/></radialGradient></defs>
+<rect x="8" y="8" width="944" height="374" rx="24" fill="url(#work-dashboard-light-bg)" stroke="#d8e0ea" stroke-width="1.5"/>
+<rect x="24" y="24" width="286" height="342" rx="20" fill="#ffffff" stroke="#d8e0ea" stroke-width="1"/>
+<text x="44" y="62" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="20" font-weight="750" fill="#172033" text-anchor="start">Focus Areas</text>
+<rect x="326" y="24" width="610" height="342" rx="20" fill="#ffffff" stroke="#d8e0ea" stroke-width="1"/>
+<text x="346" y="62" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="20" font-weight="750" fill="#172033" text-anchor="start">Selected Projects</text>
+<text x="916" y="62" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="650" fill="#2563eb" text-anchor="end">View all</text>
+<rect x="40" y="82" width="254" height="78" rx="14" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="54" y="103" width="44" height="34" rx="10" fill="none" stroke="#0891b2" stroke-width="2"/><circle cx="68" cy="120" r="3" fill="#0891b2"/><circle cx="84" cy="120" r="3" fill="#0891b2"/>
+<text x="110" y="109" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#172033" text-anchor="start">Agentic Workflows</text>
+<text x="110" y="131" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">Triage, classification, scoring,</text>
+<text x="110" y="147" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">routing, and human review.</text>
+<text x="276" y="130" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="24" font-weight="500" fill="#8793a5" text-anchor="middle">›</text>
+<rect x="40" y="170" width="254" height="78" rx="14" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<circle cx="76" cy="209" r="13" fill="none" stroke="#7c3aed" stroke-width="3"/><circle cx="76" cy="209" r="5" fill="#7c3aed"/>
+<text x="110" y="197" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#172033" text-anchor="start">Automation Systems</text>
+<text x="110" y="219" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">GitHub, Jira, Slack, APIs,</text>
+<text x="110" y="235" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">n8n, and internal tools.</text>
+<text x="276" y="218" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="24" font-weight="500" fill="#8793a5" text-anchor="middle">›</text>
+<rect x="40" y="258" width="254" height="78" rx="14" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="57" y="301" width="7" height="14" rx="2" fill="#2563eb"/><rect x="70" y="292" width="7" height="23" rx="2" fill="#2563eb"/><rect x="83" y="282" width="7" height="33" rx="2" fill="#0891b2"/>
+<text x="110" y="285" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#172033" text-anchor="start">Operational Intelligence</text>
+<text x="110" y="307" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">Signals for risk, ownership,</text>
+<text x="110" y="323" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">incidents, SLAs, and delivery.</text>
+<text x="276" y="306" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="24" font-weight="500" fill="#8793a5" text-anchor="middle">›</text>
+<rect x="346" y="82" width="182" height="264" rx="16" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="360" y="96" width="50" height="50" rx="13" fill="#ffffff" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="363" y="104" width="44" height="34" rx="10" fill="none" stroke="#0891b2" stroke-width="2"/><circle cx="377" cy="121" r="3" fill="#0891b2"/><circle cx="393" cy="121" r="3" fill="#0891b2"/>
+<path d="M 424 126 L 448 116 L 474 130 L 506 110" fill="none" stroke="#0891b2" stroke-width="1.5" opacity=".65"/>
+<circle cx="448" cy="116" r="2.5" fill="#0891b2"/>
+<circle cx="474" cy="130" r="2.5" fill="#0891b2"/>
+<circle cx="506" cy="110" r="2.5" fill="#0891b2"/>
+<text x="360" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">Agentic Issue</text>
+<text x="360" y="207" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">Triage</text>
+<text x="360" y="244" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">Issue summaries, risk scoring,</text>
+<text x="360" y="263" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">routing, and human review.</text>
+<line x1="360" y1="296" x2="514" y2="296" stroke="#d8e0ea" stroke-width="1"/>
+<circle cx="366" cy="318" r="5" fill="#0891b2"/>
+<text x="378" y="322" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#8793a5" text-anchor="start">Agentic AI</text>
+<rect x="540" y="82" width="182" height="264" rx="16" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="554" y="96" width="50" height="50" rx="13" fill="#ffffff" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="560" y="126" width="7" height="14" rx="2" fill="#2563eb"/><rect x="573" y="117" width="7" height="23" rx="2" fill="#2563eb"/><rect x="586" y="107" width="7" height="33" rx="2" fill="#0891b2"/>
+<path d="M 618 126 L 642 116 L 668 130 L 700 110" fill="none" stroke="#2563eb" stroke-width="1.5" opacity=".65"/>
+<circle cx="642" cy="116" r="2.5" fill="#2563eb"/>
+<circle cx="668" cy="130" r="2.5" fill="#2563eb"/>
+<circle cx="700" cy="110" r="2.5" fill="#2563eb"/>
+<text x="554" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">GitHub Portfolio</text>
+<text x="554" y="207" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">Intelligence</text>
+<text x="554" y="244" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">Self-updating repository</text>
+<text x="554" y="263" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">analytics and profile insights.</text>
+<line x1="554" y1="296" x2="708" y2="296" stroke="#d8e0ea" stroke-width="1"/>
+<circle cx="560" cy="318" r="5" fill="#2563eb"/>
+<text x="572" y="322" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#8793a5" text-anchor="start">Python · GitHub API</text>
+<rect x="734" y="82" width="182" height="264" rx="16" fill="#f3f6fa" stroke="#d8e0ea" stroke-width="1"/>
+<rect x="748" y="96" width="50" height="50" rx="13" fill="#ffffff" stroke="#d8e0ea" stroke-width="1"/>
+<circle cx="773" cy="122" r="13" fill="none" stroke="#7c3aed" stroke-width="3"/><circle cx="773" cy="122" r="5" fill="#7c3aed"/>
+<path d="M 812 126 L 836 116 L 862 130 L 894 110" fill="none" stroke="#7c3aed" stroke-width="1.5" opacity=".65"/>
+<circle cx="836" cy="116" r="2.5" fill="#7c3aed"/>
+<circle cx="862" cy="130" r="2.5" fill="#7c3aed"/>
+<circle cx="894" cy="110" r="2.5" fill="#7c3aed"/>
+<text x="748" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">Workflow</text>
+<text x="748" y="207" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="750" fill="#172033" text-anchor="start">Patterns</text>
+<text x="748" y="244" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">Reusable intake, approval,</text>
+<text x="748" y="263" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" fill="#56657a" text-anchor="start">routing, and escalation designs.</text>
+<line x1="748" y1="296" x2="902" y2="296" stroke="#d8e0ea" stroke-width="1"/>
+<circle cx="754" cy="318" r="5" fill="#7c3aed"/>
+<text x="766" y="322" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="600" fill="#8793a5" text-anchor="start">System Design · APIs</text>
+</svg>
