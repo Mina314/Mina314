@@ -407,30 +407,111 @@ def relative_time(value):
     except ValueError:
         return ""
 
-
 def generate_activity(data, theme):
     uid = f"activity-{theme.name}"
     items = data.get("activity", [])[:5]
-    body = [
-        box(8, 8, 944, 360, 22, f"url(#{uid}-bg)", theme.border),
-        txt(34, 44, "Recent Activity", 22, theme.text, 750),
-    ]
-    if not items:
-        body.append(txt(34, 94, "No recent public activity found.", 16, theme.secondary))
-    else:
-        colors = [theme.blue, theme.green, theme.violet, theme.cyan]
-        for i, item in enumerate(items):
-            y = 82 + i * 54
-            color = colors[i % len(colors)]
-            body.append(f'<circle cx="46" cy="{y}" r="8" fill="{color}"/>')
-            if i < len(items)-1:
-                body.append(f'<line x1="46" y1="{y+10}" x2="46" y2="{y+44}" stroke="{theme.border}" stroke-width="2"/>')
-            body.append(txt(70, y+5, item.get("action",""), 15, theme.text, 650))
-            if item.get("detail"):
-                body.append(txt(70, y+27, item["detail"], 12, theme.secondary))
-            body.append(txt(918, y+5, relative_time(item.get("created_at","")), 12, theme.muted, 500, "end"))
-    return render_svg(960, 376, gradients(theme, uid), "\n".join(body))
 
+    # Dynamically size the card based on the number of activities.
+    item_count = max(len(items), 1)
+    card_height = 100 + item_count * 62
+    svg_height = card_height + 16
+
+    body = [
+        box(
+            8,
+            8,
+            944,
+            card_height,
+            22,
+            f"url(#{uid}-bg)",
+            theme.border,
+        ),
+        txt(
+            34,
+            44,
+            "Recent Activity",
+            22,
+            theme.text,
+            750,
+        ),
+    ]
+
+    if not items:
+        body.append(
+            txt(
+                34,
+                94,
+                "No recent public activity found.",
+                16,
+                theme.secondary,
+            )
+        )
+    else:
+        colors = [
+            theme.blue,
+            theme.green,
+            theme.violet,
+            theme.cyan,
+        ]
+
+        for i, item in enumerate(items):
+            y = 82 + i * 62
+            color = colors[i % len(colors)]
+
+            body.append(
+                f'<circle cx="46" cy="{y}" r="8" fill="{color}"/>'
+            )
+
+            if i < len(items) - 1:
+                body.append(
+                    f'<line '
+                    f'x1="46" y1="{y + 10}" '
+                    f'x2="46" y2="{y + 52}" '
+                    f'stroke="{theme.border}" '
+                    f'stroke-width="2"/>'
+                )
+
+            body.append(
+                txt(
+                    70,
+                    y + 5,
+                    item.get("action", ""),
+                    15,
+                    theme.text,
+                    650,
+                )
+            )
+
+            detail = item.get("detail", "")
+            if detail:
+                body.append(
+                    txt(
+                        70,
+                        y + 28,
+                        detail,
+                        12,
+                        theme.secondary,
+                    )
+                )
+
+            body.append(
+                txt(
+                    918,
+                    y + 5,
+                    relative_time(item.get("created_at", "")),
+                    12,
+                    theme.muted,
+                    500,
+                    "end",
+                )
+            )
+
+    return render_svg(
+        960,
+        svg_height,
+        gradients(theme, uid),
+        "\n".join(body),
+    )
 
 def generate_all_assets(data: dict[str, Any], assets_dir: Path):
     assets_dir.mkdir(parents=True, exist_ok=True)
