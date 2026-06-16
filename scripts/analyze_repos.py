@@ -215,110 +215,93 @@ def fetch_contributions(s: requests.Session) -> dict[str, Any]:
         "longest_streak": longest_streak,
     }
 
-def fetch_push_details(
-    session: requests.Session,
-    repo: str,
-    payload: dict[str, Any],
-    created_at: str,
-) -> str:
-    """Retrieve commit count and messages for a PushEvent."""
 
-    before = payload.get("before")
-    head = payload.get("head")
+def fetch_current_month_commit_summary(
+    s: requests.Session,
+) -> dict[str, Any]:
+    """
+    Fetch GitHub-qualified commit contributions for the current calendar month.
 
-    zero_sha = "0" * 40
+    Returns:
+    {
+        "total": 16,
+        "by_repository": {
+            "Mina314": 16
+        }
+    }
+    """
+    if "Authorization" not in s.headers:
+        return {
+            "total": None,
+            "by_repository": {},
+        }
 
-    # Best option: compare the before and head commits.
-    if (
-        before
-        and head
-        and before != zero_sha
-        and head != zero_sha
-        and before != head
-    ):
-        response = session.get(
-            f"{API}/repos/{USERNAME}/{repo}/compare/{before}...{head}",
-            timeout=30,
-        )
+    now = datetime.now(timezone.utc)
+    month_start = datetime(
+        now.year,
+        now.month,
+        1,
+        tzinfo=timezone.utc,
+    )
 
-        if response.status_code == 200:
-            comparison = response.json()
-            commits = comparison.get("commits", [])
+    query = """
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
+        contributionsCollection(from: $from, to: $to) {
+          totalCommitContributions
+          commitContributionsByRepository(maxRepositories: 100) {
+            repository {
+              name
+            }
+            contributions(first: 100) {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+    """
 
-            if commits:
-                count = len(commits)
-
-                messages = []
-                for commit in commits[:2]:
-                    message = (
-                        commit.get("commit", {})
-                        .get("message", "")
-                        .splitlines()[0]
-                        .strip()
-                    )
-
-                    if message:
-                        messages.append(message)
-
-                detail = f"{count} commit{'s' if count != 1 else ''}"
-
-                if messages:
-                    detail += f" · {'; '.join(messages)}"
-
-                return detail
-
-    # Fallback: search for commits close to the event timestamp.
-    try:
-        event_time = datetime.fromisoformat(
-            created_at.replace("Z", "+00:00")
-        )
-
-        since = event_time - timedelta(minutes=10)
-        until = event_time + timedelta(minutes=10)
-
-        response = session.get(
-            f"{API}/repos/{USERNAME}/{repo}/commits",
-            params={
-                "author": USERNAME,
-                "since": since.isoformat(),
-                "until": until.isoformat(),
-                "per_page": 10,
+    response = s.post(
+        GRAPHQL,
+        json={
+            "query": query,
+            "variables": {
+                "login": USERNAME,
+                "from": month_start.isoformat(),
+                "to": now.isoformat(),
             },
-            timeout=30,
-        )
+        },
+        timeout=30,
+    )
+    response.raise_for_status()
 
-        if response.status_code == 200:
-            commits = response.json()
+    payload = response.json()
 
-            if commits:
-                count = len(commits)
+    if payload.get("errors"):
+        raise RuntimeError(payload["errors"])
 
-                messages = []
-                for commit in commits[:2]:
-                    message = (
-                        commit.get("commit", {})
-                        .get("message", "")
-                        .splitlines()[0]
-                        .strip()
-                    )
+    collection = payload["data"]["user"]["contributionsCollection"]
 
-                    if message:
-                        messages.append(message)
+    by_repository: dict[str, int] = {}
 
-                detail = f"{count} commit{'s' if count != 1 else ''}"
+    for item in collection.get(
+        "commitContributionsByRepository",
+        [],
+    ):
+        repo_name = item["repository"]["name"]
+        count = item["contributions"]["totalCount"]
+        by_repository[repo_name] = count
 
-                if messages:
-                    detail += f" · {'; '.join(messages)}"
+    return {
+        "total": collection["totalCommitContributions"],
+        "by_repository": by_repository,
+    }
 
-                return detail
-
-    except (ValueError, TypeError):
-        pass
-
-    return "Repository updated"
-
-
-def fetch_activity(s: requests.Session) -> list[dict[str, str]]:
+def fetch_activity(
+    s: requests.Session,
+    month_commits: dict[str, Any],
+) -> list[dict[str, str]]:
     response = s.get(
         f"{API}/users/{USERNAME}/events/public",
         params={"per_page": 100},
@@ -351,46 +334,51 @@ def fetch_activity(s: requests.Session) -> list[dict[str, str]]:
 
             action = f"Updated {repo}"
 
-            since = datetime.now(timezone.utc) - timedelta(days=30)
-
-            commits_response = s.get(
-                f"{API}/repos/{USERNAME}/{repo}/commits",
-                params={
-                    "author": USERNAME,
-                    "since": since.isoformat(),
-                    "per_page": 100,
-                },
-                timeout=30,
-            )
-
-            recent_commits = (
-                commits_response.json()
-                if commits_response.status_code == 200
-                else []
-            )
-
-            commit_count = len(recent_commits)
+            commit_count = month_commits.get(
+                "by_repository",
+                {},
+            ).get(repo)
 
             latest_message = ""
-            if recent_commits:
-                latest_message = (
-                    recent_commits[0]
-                    .get("commit", {})
-                    .get("message", "")
-                    .splitlines()[0]
-                    .strip()
+
+            before = payload.get("before")
+            head = payload.get("head")
+            zero_sha = "0" * 40
+
+            if (
+                before
+                and head
+                and before != zero_sha
+                and head != zero_sha
+                and before != head
+            ):
+                compare_response = s.get(
+                    f"{API}/repos/{USERNAME}/{repo}/compare/{before}...{head}",
+                    timeout=30,
                 )
 
-            if commit_count > 0 and latest_message:
+                if compare_response.status_code == 200:
+                    commits = compare_response.json().get("commits", [])
+
+                    if commits:
+                        latest_message = (
+                            commits[-1]
+                            .get("commit", {})
+                            .get("message", "")
+                            .splitlines()[0]
+                            .strip()
+                        )
+
+            if commit_count is not None and latest_message:
                 detail = (
                     f"{commit_count} commit"
-                    f"{'s' if commit_count != 1 else ''} in the last 30 days"
+                    f"{'s' if commit_count != 1 else ''} this month"
                     f" · Latest: {latest_message}"
                 )
-            elif commit_count > 0:
+            elif commit_count is not None:
                 detail = (
                     f"{commit_count} commit"
-                    f"{'s' if commit_count != 1 else ''} in the last 30 days"
+                    f"{'s' if commit_count != 1 else ''} this month"
                 )
             else:
                 detail = "Repository updated"
@@ -469,96 +457,6 @@ def fetch_activity(s: requests.Session) -> list[dict[str, str]]:
     return items
 
 
-    response = s.get(
-        f"{API}/users/{USERNAME}/events/public",
-        params={"per_page": 100},
-        timeout=30,
-    )
-    response.raise_for_status()
-
-    items: list[dict[str, str]] = []
-    seen_keys: set[str] = set()
-
-    for event in response.json():
-        event_type = event.get("type", "")
-        repo = event.get("repo", {}).get("name", "").replace(
-            f"{USERNAME}/",
-            "",
-        )
-        payload = event.get("payload", {})
-        created_at = event.get("created_at", "")
-
-        action = ""
-        detail = ""
-        dedupe_key = ""
-
-        if event_type == "PushEvent":
-            dedupe_key = f"push:{repo}"
-
-            action = f"Updated {repo}"
-
-            # Count authored commits in this repository during the last 30 days.
-            since = datetime.now(timezone.utc) - timedelta(days=30)
-
-            commits_response = s.get(
-                f"{API}/repos/{USERNAME}/{repo}/commits",
-                params={
-                    "author": USERNAME,
-                    "since": since.isoformat(),
-                    "per_page": 100,
-                },
-                timeout=30,
-            )
-
-            if commits_response.status_code == 200:
-                recent_commits = commits_response.json()
-            else:
-                recent_commits = []
-
-            commit_count = len(recent_commits)
-
-            latest_message = ""
-            if recent_commits:
-                latest_message = (
-                    recent_commits[0]
-                    .get("commit", {})
-                    .get("message", "")
-                    .splitlines()[0]
-                    .strip()
-                )
-
-            if commit_count > 0 and latest_message:
-                detail = (
-                    f"{commit_count} commit"
-                    f"{'s' if commit_count != 1 else ''} in the last 30 days"
-                    f" · Latest: {latest_message}"
-                )
-            elif commit_count > 0:
-                detail = (
-                    f"{commit_count} commit"
-                    f"{'s' if commit_count != 1 else ''} in the last 30 days"
-                )
-            else:
-                detail = "Repository updated"
-
-        if dedupe_key in seen_keys:
-            continue
-
-        seen_keys.add(dedupe_key)
-
-        items.append(
-            {
-                "action": action,
-                "detail": detail[:90],
-                "created_at": created_at,
-            }
-        )
-
-        if len(items) >= 5:
-            break
-
-    return items
-
 def main() -> None:
     s = build_session()
     repos = fetch_repositories(s)
@@ -568,31 +466,55 @@ def main() -> None:
 
     for repo in repos:
         languages = fetch_languages(s, repo["name"])
-        for language, amount in languages.items():
-            language_totals[language] = language_totals.get(language, 0) + amount
-        normalized.append({
-            "name": repo["name"],
-            "url": repo["html_url"],
-            "description": repo.get("description"),
-            "languages": languages,
-            "pushed_at": repo.get("pushed_at"),
-        })
 
-    top_language = max(language_totals, key=language_totals.get) if language_totals else "N/A"
+        for language, amount in languages.items():
+            language_totals[language] = (
+                language_totals.get(language, 0) + amount
+            )
+
+        normalized.append(
+            {
+                "name": repo["name"],
+                "url": repo["html_url"],
+                "description": repo.get("description"),
+                "languages": languages,
+                "pushed_at": repo.get("pushed_at"),
+            }
+        )
+
+    top_language = (
+        max(language_totals, key=language_totals.get)
+        if language_totals
+        else "N/A"
+    )
+
+    contribution_data = fetch_contributions(s)
+    monthly_commit_summary = fetch_current_month_commit_summary(s)
+
+    contribution_data["commits_current_month"] = (
+        monthly_commit_summary["total"]
+    )
+
     data = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "username": USERNAME,
         "repo_count": len(repos),
         "top_language": top_language,
         "repositories": normalized,
-        "contributions": fetch_contributions(s),
-        "activity": fetch_activity(s),
+        "contributions": contribution_data,
+        "activity": fetch_activity(s, monthly_commit_summary),
     }
 
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    DATA_PATH.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+    DATA_PATH.write_text(
+        json.dumps(data, indent=2),
+        encoding="utf-8",
+    )
+
     generate_all_assets(data, ASSETS_DIR)
     log.info("Updated profile assets.")
+
 
 
 if __name__ == "__main__":

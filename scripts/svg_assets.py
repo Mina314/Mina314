@@ -371,7 +371,15 @@ def generate_insights(data, theme):
     contributions = data.get("contributions", {})
     metrics = [
         ("Repositories", str(data.get("repo_count", 0)), "public, non-archived"),
-        ("Commits", str(contributions.get("commits")) if contributions.get("commits") is not None else "N/A", "last 12 months"),
+        (
+            "Commits",
+            (
+                str(contributions.get("commits_current_month"))
+                if contributions.get("commits_current_month") is not None
+                else "N/A"
+            ),
+            "current calendar month",
+        ),
         ("Top Language", data.get("top_language", "N/A"), "by GitHub language bytes"),
         (
             "Longest Streak",
