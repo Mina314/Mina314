@@ -50,27 +50,29 @@
 </tr>
 </table>
 
-## Portfolio Insights
+## Portfolio Insights & Activity
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/portfolio_insights_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/portfolio_insights_light.svg">
-    <img src="./assets/portfolio_insights_dark.svg" width="100%" alt="GitHub portfolio insights">
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/insights_activity_dark.svg?v=2"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/insights_activity_light.svg?v=2"
+    >
+    <img
+      src="./assets/insights_activity_dark.svg?v=2"
+      width="100%"
+      alt="GitHub portfolio insights, language distribution, and recent activity"
+    >
   </picture>
 </p>
 
-## Recent Activity
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/activity_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/activity_light.svg">
-    <img src="./assets/activity_dark.svg?v=3" width="100%" alt="Recent public GitHub activity">
-  </picture>
-</p>
-
-<sub>Repository insights and activity are refreshed automatically with GitHub Actions.</sub>
+<sub>
+Repository insights and activity are refreshed automatically with GitHub Actions.
+</sub>
 
 <br><br>
 

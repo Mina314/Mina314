@@ -1,17 +1,45 @@
 {
-  "generated_at": "2026-06-16T04:53:21.054781+00:00",
+  "generated_at": "2026-06-16T05:15:58.226208+00:00",
   "username": "Mina314",
   "repo_count": 15,
+  "language_count": 8,
   "top_language": "Jupyter Notebook",
+  "language_distribution": [
+    {
+      "name": "Jupyter Notebook",
+      "bytes": 9155025,
+      "percentage": 98.4
+    },
+    {
+      "name": "Python",
+      "bytes": 55566,
+      "percentage": 0.6
+    },
+    {
+      "name": "Java",
+      "bytes": 44938,
+      "percentage": 0.5
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 15624,
+      "percentage": 0.2
+    },
+    {
+      "name": "Other",
+      "bytes": 28327,
+      "percentage": 0.3
+    }
+  ],
   "repositories": [
     {
       "name": "Mina314",
       "url": "https://github.com/Mina314/Mina314",
       "description": null,
       "languages": {
-        "Python": 32834
+        "Python": 30179
       },
-      "pushed_at": "2026-06-16T04:38:39Z"
+      "pushed_at": "2026-06-16T05:03:27Z"
     },
     {
       "name": "uber_data_engineering",
@@ -137,15 +165,15 @@
     }
   ],
   "contributions": {
-    "commits": 16,
+    "commits": 19,
     "longest_streak": 5,
-    "commits_current_month": 16
+    "commits_current_month": 19
   },
   "activity": [
     {
       "action": "Updated Mina314",
-      "detail": "16 commits this month \u00b7 Latest: Improve recent activity commit summary",
-      "created_at": "2026-06-16T04:38:39Z"
+      "detail": "19 commits this month \u00b7 Latest: Revert \"Redesign focus areas and projects dashboard\"",
+      "created_at": "2026-06-16T05:03:27Z"
     },
     {
       "action": "Created branch in Mina314",

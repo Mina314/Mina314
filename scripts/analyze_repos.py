@@ -488,6 +488,50 @@ def main() -> None:
         else "N/A"
     )
 
+    total_language_bytes = sum(language_totals.values())
+    language_distribution: list[dict[str, Any]] = []
+
+    if total_language_bytes > 0:
+        sorted_languages = sorted(
+            language_totals.items(),
+            key=lambda item: item[1],
+            reverse=True,
+        )
+
+        top_languages = sorted_languages[:4]
+
+        remaining_bytes = sum(
+            amount
+            for _, amount in sorted_languages[4:]
+        )
+
+        for language, amount in top_languages:
+            language_distribution.append(
+                {
+                    "name": language,
+                    "bytes": amount,
+                    "percentage": round(
+                        amount / total_language_bytes * 100,
+                        1,
+                    ),
+                }
+            )
+
+        if remaining_bytes > 0:
+            language_distribution.append(
+                {
+                    "name": "Other",
+                    "bytes": remaining_bytes,
+                    "percentage": round(
+                        remaining_bytes / total_language_bytes * 100,
+                        1,
+                    ),
+                }
+            )
+
+    language_count = len(language_totals)
+
+
     contribution_data = fetch_contributions(s)
     monthly_commit_summary = fetch_current_month_commit_summary(s)
 
@@ -499,10 +543,15 @@ def main() -> None:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "username": USERNAME,
         "repo_count": len(repos),
+        "language_count": language_count,
         "top_language": top_language,
+        "language_distribution": language_distribution,
         "repositories": normalized,
         "contributions": contribution_data,
-        "activity": fetch_activity(s, monthly_commit_summary),
+        "activity": fetch_activity(
+            s,
+            monthly_commit_summary,
+        ),
     }
 
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)

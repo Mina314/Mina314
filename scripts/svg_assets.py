@@ -536,15 +536,379 @@ def generate_activity(data, theme):
         "\n".join(body),
     )
 
-def generate_all_assets(data: dict[str, Any], assets_dir: Path):
-    assets_dir.mkdir(parents=True, exist_ok=True)
+def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
+    uid = f"insights-activity-{theme.name}"
+
+    width = 960
+    height = 410
+
+    contributions = data.get("contributions", {})
+    languages = data.get("language_distribution", [])[:5]
+    activity = data.get("activity", [])[:4]
+
+    repo_count = data.get("repo_count", 0)
+    language_count = data.get("language_count", 0)
+
+    commits = contributions.get("commits_current_month")
+    commits_text = str(commits) if commits is not None else "N/A"
+
+    body = [
+        # Portfolio Insights panel.
+        box(
+            8,
+            8,
+            570,
+            394,
+            22,
+            f"url(#{uid}-bg)",
+            theme.border,
+            1.5,
+        ),
+        txt(
+            32,
+            48,
+            "Portfolio Insights",
+            21,
+            theme.text,
+            750,
+        ),
+
+        # Activity panel.
+        box(
+            592,
+            8,
+            360,
+            394,
+            22,
+            f"url(#{uid}-bg)",
+            theme.border,
+            1.5,
+        ),
+        txt(
+            616,
+            48,
+            "Activity",
+            21,
+            theme.text,
+            750,
+        ),
+    ]
+
+    # Top portfolio metric cards.
+    metrics = [
+        (
+            "Repositories",
+            str(repo_count),
+            "public, non-archived",
+            theme.blue,
+        ),
+        (
+            "Commits",
+            commits_text,
+            "current calendar month",
+            theme.violet,
+        ),
+        (
+            "Languages Used",
+            str(language_count),
+            "across public repositories",
+            theme.cyan,
+        ),
+    ]
+
+    card_width = 164
+    card_height = 112
+    card_gap = 12
+
+    for index, (label, value, note, color) in enumerate(metrics):
+        x = 28 + index * (card_width + card_gap)
+
+        body.extend([
+            box(
+                x,
+                68,
+                card_width,
+                card_height,
+                14,
+                theme.inner,
+                theme.border,
+            ),
+            txt(
+                x + 16,
+                94,
+                label,
+                11,
+                theme.muted,
+                650,
+            ),
+            txt(
+                x + 16,
+                132,
+                value,
+                27,
+                theme.text,
+                800,
+            ),
+            txt(
+                x + 16,
+                158,
+                note,
+                9,
+                theme.secondary,
+            ),
+        ])
+
+        points = [
+            (x + 16, 169),
+            (x + 48, 161),
+            (x + 80, 165),
+            (x + 112, 151),
+            (x + 146, 157),
+        ]
+
+        body.append(
+            f'<path '
+            f'd="M {" L ".join(f"{px} {py}" for px, py in points)}" '
+            f'fill="none" '
+            f'stroke="{color}" '
+            f'stroke-width="2.5"/>'
+        )
+
+    # Language distribution heading.
+    body.append(
+        txt(
+            32,
+            220,
+            "Language Distribution",
+            14,
+            theme.text,
+            700,
+        )
+    )
+
+    # Donut chart.
+    donut_cx = 112
+    donut_cy = 302
+    donut_radius = 52
+    donut_stroke = 20
+    circumference = 2 * 3.14159 * donut_radius
+
+    language_colors = [
+        theme.blue,
+        theme.violet,
+        theme.cyan,
+        theme.green,
+        theme.muted,
+    ]
+
+    # Background donut track.
+    body.append(
+        f'<circle '
+        f'cx="{donut_cx}" '
+        f'cy="{donut_cy}" '
+        f'r="{donut_radius}" '
+        f'fill="none" '
+        f'stroke="{theme.track}" '
+        f'stroke-width="{donut_stroke}"/>'
+    )
+
+    offset = 0.0
+
+    for index, language in enumerate(languages):
+        percentage = float(language.get("percentage", 0))
+        segment = circumference * percentage / 100
+        color = language_colors[index % len(language_colors)]
+
+        body.append(
+            f'<circle '
+            f'cx="{donut_cx}" '
+            f'cy="{donut_cy}" '
+            f'r="{donut_radius}" '
+            f'fill="none" '
+            f'stroke="{color}" '
+            f'stroke-width="{donut_stroke}" '
+            f'stroke-dasharray="{segment} {circumference - segment}" '
+            f'stroke-dashoffset="{-offset}" '
+            f'transform="rotate(-90 {donut_cx} {donut_cy})"/>'
+        )
+
+        offset += segment
+
+    body.extend([
+        txt(
+            donut_cx,
+            donut_cy - 2,
+            data.get("top_language", "N/A"),
+            10,
+            theme.text,
+            700,
+            "middle",
+        ),
+        txt(
+            donut_cx,
+            donut_cy + 16,
+            "Top language",
+            9,
+            theme.muted,
+            500,
+            "middle",
+        ),
+    ])
+
+    # Language legend.
+    for index, language in enumerate(languages):
+        legend_x = 210
+        legend_y = 254 + index * 27
+        color = language_colors[index % len(language_colors)]
+
+        body.extend([
+            (
+                f'<circle '
+                f'cx="{legend_x}" '
+                f'cy="{legend_y}" '
+                f'r="5" '
+                f'fill="{color}"/>'
+            ),
+            txt(
+                legend_x + 14,
+                legend_y + 4,
+                language.get("name", ""),
+                11,
+                theme.secondary,
+                600,
+            ),
+            txt(
+                548,
+                legend_y + 4,
+                f'{language.get("percentage", 0)}%',
+                11,
+                theme.muted,
+                600,
+                "end",
+            ),
+        ])
+
+    # Recent activity timeline.
+    if not activity:
+        body.append(
+            txt(
+                616,
+                94,
+                "No recent public activity found.",
+                13,
+                theme.secondary,
+            )
+        )
+    else:
+        activity_colors = [
+            theme.blue,
+            theme.green,
+            theme.violet,
+            theme.cyan,
+        ]
+
+        for index, item in enumerate(activity):
+            y = 94 + index * 73
+            color = activity_colors[index % len(activity_colors)]
+
+            body.append(
+                f'<circle cx="622" cy="{y}" r="8" fill="{color}"/>'
+            )
+
+            if index < len(activity) - 1:
+                body.append(
+                    f'<line '
+                    f'x1="622" y1="{y + 10}" '
+                    f'x2="622" y2="{y + 63}" '
+                    f'stroke="{theme.border}" '
+                    f'stroke-width="2"/>'
+                )
+
+            body.append(
+                txt(
+                    644,
+                    y + 4,
+                    item.get("action", ""),
+                    12,
+                    theme.text,
+                    700,
+                )
+            )
+
+            detail = item.get("detail", "")
+            if detail:
+                body.append(
+                    txt(
+                        644,
+                        y + 25,
+                        detail[:42],
+                        10,
+                        theme.secondary,
+                    )
+                )
+
+            body.append(
+                txt(
+                    928,
+                    y + 4,
+                    relative_time(
+                        item.get("created_at", "")
+                    ),
+                    10,
+                    theme.muted,
+                    500,
+                    "end",
+                )
+            )
+
+    return render_svg(
+        width,
+        height,
+        gradients(theme, uid),
+        "\n".join(body),
+    )
+
+
+def generate_all_assets(
+    data: dict[str, Any],
+    assets_dir: Path,
+) -> None:
+    assets_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
     for theme in (DARK, LIGHT):
-        (assets_dir/f"intro_{theme.name}.svg").write_text(generate_intro(theme), encoding="utf-8")
+        (
+            assets_dir / f"intro_{theme.name}.svg"
+        ).write_text(
+            generate_intro(theme),
+            encoding="utf-8",
+        )
+
         for key in FOCUS:
-            (assets_dir/f"focus_{key}_{theme.name}.svg").write_text(generate_focus(theme, key), encoding="utf-8")
+            (
+                assets_dir / f"focus_{key}_{theme.name}.svg"
+            ).write_text(
+                generate_focus(theme, key),
+                encoding="utf-8",
+            )
+
         for key in PROJECTS:
-            (assets_dir/f"project_{key}_{theme.name}.svg").write_text(generate_project(theme, key), encoding="utf-8")
-        (assets_dir/f"portfolio_insights_{theme.name}.svg").write_text(generate_insights(data, theme), encoding="utf-8")
-        (assets_dir/f"activity_{theme.name}.svg").write_text(generate_activity(data, theme), encoding="utf-8")
+            (
+                assets_dir / f"project_{key}_{theme.name}.svg"
+            ).write_text(
+                generate_project(theme, key),
+                encoding="utf-8",
+            )
+
+        (
+            assets_dir / f"insights_activity_{theme.name}.svg"
+        ).write_text(
+            generate_insights_activity(data, theme),
+            encoding="utf-8",
+        )
+
     for path in assets_dir.glob("*.svg"):
         ET.parse(path)
+

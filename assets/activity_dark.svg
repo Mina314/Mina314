@@ -6,8 +6,8 @@
 <circle cx="46" cy="82" r="8" fill="#4ea1ff"/>
 <line x1="46" y1="92" x2="46" y2="134" stroke="#223651" stroke-width="2"/>
 <text x="70" y="87" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" fill="#f3f7ff" text-anchor="start">Updated Mina314</text>
-<text x="70" y="110" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#a8b5c8" text-anchor="start">16 commits this month · Latest: Improve recent activity commit summary</text>
-<text x="918" y="87" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="#71829b" text-anchor="end">14m ago</text>
+<text x="70" y="110" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#a8b5c8" text-anchor="start">19 commits this month · Latest: Revert &quot;Redesign focus areas and projects dashboard&quot;</text>
+<text x="918" y="87" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="500" fill="#71829b" text-anchor="end">7m ago</text>
 <circle cx="46" cy="144" r="8" fill="#31c48d"/>
 <text x="70" y="149" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="15" font-weight="650" fill="#f3f7ff" text-anchor="start">Created branch in Mina314</text>
 <text x="70" y="172" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" fill="#a8b5c8" text-anchor="start">main</text>
