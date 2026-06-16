@@ -651,20 +651,22 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
             ),
             txt(
                 x + 16,
-                158,
+                150,
                 note,
                 9,
                 theme.secondary,
             ),
         ])
 
+
         points = [
-            (x + 16, 169),
-            (x + 48, 161),
-            (x + 80, 165),
-            (x + 112, 151),
-            (x + 146, 157),
+            (x + 16, 171),
+            (x + 48, 164),
+            (x + 80, 168),
+            (x + 112, 158),
+            (x + 146, 163),
         ]
+
 
         body.append(
             f'<path '
@@ -739,7 +741,7 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
             donut_cx,
             donut_cy - 2,
             data.get("top_language", "N/A"),
-            10,
+            12,
             theme.text,
             700,
             "middle",

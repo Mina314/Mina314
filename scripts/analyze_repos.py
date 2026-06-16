@@ -468,9 +468,23 @@ def main() -> None:
         languages = fetch_languages(s, repo["name"])
 
         for language, amount in languages.items():
-            language_totals[language] = (
-                language_totals.get(language, 0) + amount
+            # Dockerfile is a file type, not a programming language
+            # for this portfolio summary.
+            if language == "Dockerfile":
+                continue
+
+            # Group Python-based Jupyter notebooks under Python.
+            normalized_language = (
+                "Python"
+                if language == "Jupyter Notebook"
+                else language
             )
+
+            language_totals[normalized_language] = (
+                language_totals.get(normalized_language, 0)
+                + amount
+            )
+
 
         normalized.append(
             {
