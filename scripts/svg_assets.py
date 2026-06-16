@@ -857,35 +857,68 @@ def generate_insights_activity(data: dict[str, Any], theme: Theme) -> str:
                 )
             )
 
-            detail = item.get("detail", "")
+
+            detail = item.get("detail", "").strip()
+
             if detail:
-                words = detail.split()
-                lines: list[str] = []
-                current_line = ""
+                if not detail.endswith((".", "!", "?")):
+                    detail += "."
 
-                for word in words:
-                    candidate = f"{current_line} {word}".strip()
-
-                    if len(candidate) <= 31:
-                        current_line = candidate
-                    else:
-                        if current_line:
-                            lines.append(current_line)
-                        current_line = word
-
-                if current_line:
-                    lines.append(current_line)
-
-                for line_index, line in enumerate(lines[:3]):
+                # Short details stay at normal size.
+                if len(detail) <= 34:
                     body.append(
                         txt(
                             644,
-                            y + 25 + line_index * 16,
-                            line,
+                            y + 25,
+                            detail,
                             10,
                             theme.secondary,
                         )
                     )
+
+                # Medium details stay on one line with a slightly smaller font.
+                elif len(detail) <= 55:
+                    body.append(
+                        txt(
+                            644,
+                            y + 25,
+                            detail,
+                            8.5,
+                            theme.secondary,
+                        )
+                    )
+
+                # Longer details wrap naturally across two lines.
+                else:
+                    words = detail.split()
+                    lines: list[str] = []
+                    current_line = ""
+
+                    for word in words:
+                        candidate = f"{current_line} {word}".strip()
+
+                        if len(candidate) <= 42:
+                            current_line = candidate
+                        else:
+                            if current_line:
+                                lines.append(current_line)
+                            current_line = word
+
+                    if current_line:
+                        lines.append(current_line)
+
+                    for line_index, line in enumerate(lines[:2]):
+                        body.append(
+                            txt(
+                                644,
+                                y + 25 + line_index * 16,
+                                line,
+                                9,
+                                theme.secondary,
+                            )
+                        )
+
+
 
             body.append(
                 txt(
