@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 446" role="img">
+<defs><linearGradient id="intro-dark-bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#07111f"/><stop offset="100%" stop-color="#0b1727"/></linearGradient><linearGradient id="intro-dark-accent" x1="0" x2="1"><stop offset="0%" stop-color="#4ea1ff"/><stop offset="100%" stop-color="#9b6cff"/></linearGradient><radialGradient id="intro-dark-glow" cx="78%" cy="42%" r="48%"><stop offset="0%" stop-color="#4ea1ff" stop-opacity=".16"/><stop offset="100%" stop-color="#4ea1ff" stop-opacity="0"/></radialGradient></defs>
+<rect x="8" y="8" width="944" height="430" rx="26" fill="url(#intro-dark-bg)" stroke="#223651" stroke-width="1.5"/>
+<rect x="8" y="8" width="944" height="430" rx="26" fill="url(#intro-dark-glow)"/>
+<text x="52" y="82" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#f3f7ff" text-anchor="start">Hi, I’m</text>
+<text x="174" y="82" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" fill="url(#intro-dark-accent)">Mina.</text>
+<text x="52" y="138" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="35" font-weight="700" fill="#f3f7ff" text-anchor="start">I build agentic workflows and</text>
+<text x="52" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="35" font-weight="700" fill="#f3f7ff" text-anchor="start">AI-powered operational systems.</text>
+<text x="52" y="229" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="400" fill="#a8b5c8" text-anchor="start">Connecting AI, APIs, automation, data, and human review</text>
+<text x="52" y="254" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="400" fill="#a8b5c8" text-anchor="start">to turn operational complexity into clear, reviewable action.</text>
+<rect x="52" y="292" width="98" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/><text x="66" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#a8b5c8" text-anchor="start">AI Systems</text>
+<rect x="162" y="292" width="161" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/><text x="176" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#a8b5c8" text-anchor="start">Workflow Automation</text>
+<rect x="335" y="292" width="196" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/><text x="349" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#a8b5c8" text-anchor="start">Operational Intelligence</text>
+<rect x="543" y="292" width="147" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/><text x="557" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" fill="#a8b5c8" text-anchor="start">Human-in-the-loop</text>
+<rect x="680" y="280" width="180" height="32" rx="9" fill="#9b6cff" stroke="#9b6cff" stroke-width="1"/>
+<rect x="680" y="280" width="180" height="32" rx="9" fill="#9b6cff" opacity=".22"/>
+<rect x="690" y="235" width="180" height="32" rx="9" fill="#4ea1ff" stroke="#4ea1ff" stroke-width="1"/>
+<rect x="690" y="235" width="180" height="32" rx="9" fill="#4ea1ff" opacity=".22"/>
+<rect x="700" y="190" width="180" height="32" rx="9" fill="#49d5e7" stroke="#49d5e7" stroke-width="1"/>
+<rect x="700" y="190" width="180" height="32" rx="9" fill="#49d5e7" opacity=".22"/>
+<circle cx="638" cy="312" r="6" fill="#4ea1ff"/>
+<circle cx="742" cy="335" r="6" fill="#4ea1ff"/>
+<circle cx="858" cy="304" r="6" fill="#4ea1ff"/>
+<circle cx="884" cy="165" r="6" fill="#4ea1ff"/>
+<line x1="638" y1="312" x2="742" y2="335" stroke="#9b6cff" opacity=".7"/>
+<line x1="742" y1="335" x2="858" y2="304" stroke="#9b6cff" opacity=".7"/>
+<line x1="858" y1="304" x2="884" y2="165" stroke="#9b6cff" opacity=".7"/>
+<rect x="752" y="92" width="60" height="52" rx="13" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="782" y="124" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="800" fill="#4ea1ff" text-anchor="middle">AI</text>
+<rect x="838" y="122" width="64" height="52" rx="13" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="870" y="154" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="15" font-weight="800" fill="#9b6cff" text-anchor="middle">&lt;/&gt;</text>
+<rect x="852" y="226" width="58" height="52" rx="13" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="881" y="258" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="22" font-weight="800" fill="#49d5e7" text-anchor="middle">▥</text>
+</svg>

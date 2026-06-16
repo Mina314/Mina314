@@ -1,32 +1,60 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile_hero_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile_hero_light.svg">
-    <img src="./assets/profile_hero_dark.svg" width="100%" alt="Mina Liu — Technical Program Manager building agentic AI workflows">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/intro_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/intro_light.svg">
+    <img src="./assets/intro_dark.svg" width="100%" alt="Mina Liu — Technical Program Manager building agentic AI workflows">
   </picture>
 </p>
 
 ## Focus Areas
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/focus_areas_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/focus_areas_light.svg">
-    <img src="./assets/focus_areas_dark.svg" width="100%" alt="Agentic workflows, automation systems, and operational intelligence">
-  </picture>
-</p>
+<table>
+<tr>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/focus_agentic_dark.svg#gh-dark-mode-only" width="100%" alt="Agentic Workflows">
+  <img src="./assets/focus_agentic_light.svg#gh-light-mode-only" width="100%" alt="Agentic Workflows">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/focus_automation_dark.svg#gh-dark-mode-only" width="100%" alt="Automation Systems">
+  <img src="./assets/focus_automation_light.svg#gh-light-mode-only" width="100%" alt="Automation Systems">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://www.datascienceportfol.io/mina">
+  <img src="./assets/focus_intelligence_dark.svg#gh-dark-mode-only" width="100%" alt="Operational Intelligence">
+  <img src="./assets/focus_intelligence_light.svg#gh-light-mode-only" width="100%" alt="Operational Intelligence">
+</a>
+</td>
+</tr>
+</table>
 
 ## Selected Projects
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/selected_projects_dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/selected_projects_light.svg">
-    <img src="./assets/selected_projects_dark.svg" width="100%" alt="Selected AI workflow and automation projects">
-  </picture>
-</p>
-
-**GitHub Portfolio Intelligence** is live in this repository: [Mina314/Mina314](https://github.com/Mina314/Mina314)
+<table>
+<tr>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314/Mina314">
+  <img src="./assets/project_portfolio_dark.svg#gh-dark-mode-only" width="100%" alt="GitHub Portfolio Intelligence — Live">
+  <img src="./assets/project_portfolio_light.svg#gh-light-mode-only" width="100%" alt="GitHub Portfolio Intelligence — Live">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/project_triage_dark.svg#gh-dark-mode-only" width="100%" alt="Agentic Issue Triage — In development">
+  <img src="./assets/project_triage_light.svg#gh-light-mode-only" width="100%" alt="Agentic Issue Triage — In development">
+</a>
+</td>
+<td width="33%" valign="top">
+<a href="https://github.com/Mina314?tab=repositories">
+  <img src="./assets/project_patterns_dark.svg#gh-dark-mode-only" width="100%" alt="Workflow Patterns — Planned">
+  <img src="./assets/project_patterns_light.svg#gh-light-mode-only" width="100%" alt="Workflow Patterns — Planned">
+</a>
+</td>
+</tr>
+</table>
 
 ## Portfolio Insights
 
@@ -34,20 +62,28 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/portfolio_insights_dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./assets/portfolio_insights_light.svg">
-    <img src="./assets/portfolio_insights_dark.svg" width="100%" alt="Insights generated from Mina's public GitHub repositories">
+    <img src="./assets/portfolio_insights_dark.svg" width="100%" alt="GitHub portfolio insights">
   </picture>
 </p>
 
-<sub>Automatically generated from public repository metadata using the GitHub API and GitHub Actions.</sub>
+## Recent Activity
 
-<sub>Earlier data engineering projects: [datascienceportfol.io/mina](https://www.datascienceportfol.io/mina)</sub>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/activity_dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/activity_light.svg">
+    <img src="./assets/activity_dark.svg" width="100%" alt="Recent public GitHub activity">
+  </picture>
+</p>
 
-## Toolkit
+<sub>Repository insights and activity are refreshed automatically with GitHub Actions.</sub>
 
-`Python` · `SQL` · `JavaScript` · `GitHub API` · `Jira API` · `Slack` · `n8n` · `Google Apps Script` · `Pandas` · `PostgreSQL` · `Airflow` · `Grafana`
+<br><br>
+
+`Python` · `SQL` · `JavaScript` · `GitHub API` · `Jira API` · `Slack` · `n8n` · `Google Apps Script` · `PostgreSQL` · `Airflow` · `Grafana`
 
 ---
 
-> I build systems that turn operational complexity into clear, reviewable action.
-
-[LinkedIn](https://www.linkedin.com/in/mina-liu-114200/) · [Email](mailto:minazliu@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/mina-liu-114200/) ·
+[Data Portfolio](https://www.datascienceportfol.io/mina) ·
+[Email](mailto:minazliu@gmail.com)
