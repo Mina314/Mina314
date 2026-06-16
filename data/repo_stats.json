@@ -236,6 +236,13 @@
       "Learning & Experiments": 0,
       "Other": 1
     },
+    "capability_counts": {
+      "AI and agents": 0,
+      "Automation and APIs": 2,
+      "Data and analytics": 3,
+      "Infrastructure": 2,
+      "Developer tooling": 1
+    },
     "maturity_counts": {
       "Production-ready": 0,
       "MVP": 0,

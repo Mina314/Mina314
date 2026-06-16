@@ -23,8 +23,9 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
-import pandas as pd
 import requests
+from matplotlib.patches import FancyBboxPatch
+from matplotlib import rcParams
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -131,11 +132,55 @@ PROJECT_CATEGORIES: dict[str, list[str]] = {
 
 CATEGORY_PRIORITY = CATEGORY_ORDER  # tie-break order (first = highest priority)
 
-# Chart styling — muted palette, readable on light and dark GitHub themes.
-CHART_COLORS = ["#4A90A4", "#6B8E7B", "#8B7BA8", "#A67C52", "#7A8B99", "#5C7A8A", "#9B8AA5"]
-TEXT_COLOR = "#3d444d"
-SUBTITLE_COLOR = "#57606a"
-GRID_COLOR = "#d0d7de"
+# Dashboard styling — SaaS analytics card aesthetic for GitHub README (~600px).
+FONT_FAMILY = "DejaVu Sans"
+ACCENT = "#6366F1"
+ACCENT_LIGHT = "#818CF8"
+CARD_BG = "#1c2128"
+CARD_BORDER = "#373e47"
+TEXT_PRIMARY = "#c9d1d9"
+TEXT_SECONDARY = "#8b949e"
+TEXT_MUTED = "#6e7681"
+TRACK_BG = "#30363d"
+PROGRESS_BG = "#21262d"
+PORTFOLIO_EXAMPLES_URL = "https://www.datascienceportfol.io/mina"
+
+# Professional impact metrics (not derived from GitHub API).
+IMPACT_METRICS: list[tuple[str, str, str]] = [
+    ("62%", "Backlog reduction", "High-priority engineering backlog"),
+    ("3×", "Faster P0 response", "Incident escalation performance"),
+    ("15+", "Engineering teams", "Workflows supported"),
+    ("240+", "Execution risks", "High-priority risks surfaced"),
+    ("28K", "Daily CI jobs", "Pipeline operations supported"),
+    ("8%", "Unknown root cause", "Down from ~54–60%"),
+]
+
+# Technology capability groups — edit keywords to tune technology_mix.svg.
+TECHNOLOGY_CAPABILITIES: dict[str, list[str]] = {
+    "AI and agents": [
+        "agent", "agentic", "llm", "ai", "machine learning", "ml",
+        "copilot", "prompt", "classification", "recommendation",
+    ],
+    "Automation and APIs": [
+        "automation", "api", "workflow", "integration", "webhook",
+        "microservice", "microservices", "event", "service", "java",
+    ],
+    "Data and analytics": [
+        "data", "analytics", "jupyter", "notebook", "pandas", "sql",
+        "visualization", "visualisation", "analysis", "forecasting",
+    ],
+    "Infrastructure": [
+        "docker", "cloud", "iot", "aws", "kubernetes", "infrastructure",
+        "real-time", "processing", "stream", "typescript",
+    ],
+    "Developer tooling": [
+        "cli", "devtool", "developer", "tool", "flashcard", "testing",
+        "ci", "cd", "pipeline", "productivity",
+    ],
+}
+
+CAPABILITY_ORDER = list(TECHNOLOGY_CAPABILITIES.keys())
+MAX_CHART_CATEGORIES = 5
 
 logging.basicConfig(
     level=logging.INFO,
@@ -570,11 +615,65 @@ def normalize_repo(
     }
 
 
+def classify_capability(
+    name: str,
+    description: str | None,
+    topics: list[str],
+    primary_language: str | None,
+    category: str,
+) -> str:
+    """Assign a repository to a technology capability group."""
+    category_map = {
+        "Agentic AI Workflows": "AI and agents",
+        "Automation & APIs": "Automation and APIs",
+        "Data & Analytics": "Data and analytics",
+        "Developer Tools": "Developer tooling",
+        "Web Applications": "Infrastructure",
+        "Learning & Experiments": "Developer tooling",
+    }
+
+    corpus = build_corpus(name, description, topics, primary_language, "")
+    scores: dict[str, int] = {}
+    for capability, keywords in TECHNOLOGY_CAPABILITIES.items():
+        scores[capability] = count_keyword_hits(corpus, keywords)
+
+    max_score = max(scores.values()) if scores else 0
+    if max_score > 0:
+        best = [cap for cap, score in scores.items() if score == max_score]
+        for capability in CAPABILITY_ORDER:
+            if capability in best:
+                return capability
+
+    return category_map.get(category, "Developer tooling")
+
+
+def top_n_with_other(
+    counts: dict[str, int], order: list[str], max_items: int = MAX_CHART_CATEGORIES
+) -> list[tuple[str, int]]:
+    """Return top N categories by count, rolling remainder into Other."""
+    ranked = sorted(
+        ((label, counts.get(label, 0)) for label in order),
+        key=lambda item: item[1],
+        reverse=True,
+    )
+    ranked = [(label, value) for label, value in ranked if value > 0]
+
+    if len(ranked) <= max_items:
+        return ranked
+
+    top = ranked[: max_items - 1]
+    other_count = sum(value for _, value in ranked[max_items - 1 :])
+    if other_count > 0:
+        top.append(("Other", other_count))
+    return top
+
+
 def build_summary(repos: list[dict[str, Any]]) -> dict[str, Any]:
     """Aggregate summary statistics from normalized repository records."""
     category_counts = {cat: 0 for cat in CATEGORY_ORDER}
     maturity_counts = {label: 0 for label in MATURITY_LABELS}
 
+    capability_counts = {cap: 0 for cap in CAPABILITY_ORDER}
     language_bytes: dict[str, int] = {}
     readme_count = 0
     actions_count = 0
@@ -587,6 +686,15 @@ def build_summary(repos: list[dict[str, Any]]) -> dict[str, Any]:
 
         label = repo["maturity_label"]
         maturity_counts[label] = maturity_counts.get(label, 0) + 1
+
+        capability = classify_capability(
+            repo["name"],
+            repo.get("description"),
+            repo.get("topics") or [],
+            repo.get("primary_language"),
+            cat,
+        )
+        capability_counts[capability] = capability_counts.get(capability, 0) + 1
 
         if repo["has_readme"]:
             readme_count += 1
@@ -617,6 +725,7 @@ def build_summary(repos: list[dict[str, Any]]) -> dict[str, Any]:
 
     return {
         "category_counts": category_counts,
+        "capability_counts": capability_counts,
         "maturity_counts": maturity_counts,
         "top_languages": dict(
             sorted(language_bytes.items(), key=lambda x: x[1], reverse=True)
@@ -678,238 +787,390 @@ def analyze_repositories(session: requests.Session) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chart generation
+# Dashboard SVG generation
 # ---------------------------------------------------------------------------
 
 
-def apply_chart_style(ax: plt.Axes, fig: plt.Figure) -> None:
-    """Apply transparent background and theme-friendly styling."""
-    fig.patch.set_alpha(0)
-    ax.patch.set_alpha(0)
-    ax.tick_params(colors=TEXT_COLOR, labelsize=10)
-    ax.xaxis.label.set_color(TEXT_COLOR)
-    ax.yaxis.label.set_color(TEXT_COLOR)
-    ax.title.set_color(TEXT_COLOR)
-    for spine in ax.spines.values():
-        spine.set_color(GRID_COLOR)
-    ax.grid(axis="x", color=GRID_COLOR, alpha=0.5, linewidth=0.5)
-
-
-def aggregate_language_percentages(
-    repos: list[dict[str, Any]],
-) -> pd.Series:
-    """Aggregate language bytes across repos, filter markup, return percentages."""
-    totals: dict[str, int] = {}
-    for repo in repos:
-        langs = repo["languages"]
-        non_markup = {k: v for k, v in langs.items() if k not in MARKUP_LANGUAGES}
-        use_langs = non_markup if non_markup else langs
-        for lang, nbytes in use_langs.items():
-            totals[lang] = totals.get(lang, 0) + nbytes
-
-    if not totals:
-        return pd.Series({"No data": 100.0})
-
-    total_bytes = sum(totals.values())
-    sorted_langs = sorted(totals.items(), key=lambda x: x[1], reverse=True)
-
-    top_n = 8
-    top = sorted_langs[:top_n]
-    other_bytes = sum(b for _, b in sorted_langs[top_n:])
-
-    labels: list[str] = []
-    pcts: list[float] = []
-    for lang, nbytes in top:
-        labels.append(lang)
-        pcts.append(round(100.0 * nbytes / total_bytes, 1))
-
-    if other_bytes > 0:
-        labels.append("Other")
-        pcts.append(round(100.0 * other_bytes / total_bytes, 1))
-
-    return pd.Series(pcts, index=labels)
-
-
-def chart_language_distribution(repos: list[dict[str, Any]], output_path: Path) -> None:
-    """Generate horizontal bar chart of language distribution by percentage."""
-    series = aggregate_language_percentages(repos)
-    fig, ax = plt.subplots(figsize=(9, max(3, len(series) * 0.45 + 1.5)))
-
-    colors = [CHART_COLORS[i % len(CHART_COLORS)] for i in range(len(series))]
-    bars = ax.barh(series.index, series.values, color=colors, height=0.6)
-    apply_chart_style(ax, fig)
-
-    ax.set_xlabel("Share of source-code bytes (%)")
-    ax.set_title("Languages Across My Projects", fontsize=14, fontweight="bold", pad=12)
-    ax.invert_yaxis()
-
-    for bar, val in zip(bars, series.values):
-        ax.text(
-            bar.get_width() + 0.5,
-            bar.get_y() + bar.get_height() / 2,
-            f"{val:.1f}%",
-            va="center",
-            ha="left",
-            fontsize=9,
-            color=TEXT_COLOR,
-        )
-
-    fig.text(
-        0.5,
-        0.02,
-        "Based on source-code bytes across public repositories",
-        ha="center",
-        fontsize=9,
-        color=SUBTITLE_COLOR,
+def configure_dashboard_fonts() -> None:
+    """Apply modern sans-serif typography for dashboard SVGs."""
+    rcParams.update(
+        {
+            "font.family": "sans-serif",
+            "font.sans-serif": [FONT_FAMILY, "Inter", "Arial", "Helvetica", "sans-serif"],
+            "axes.unicode_minus": False,
+        }
     )
 
-    plt.tight_layout(rect=[0, 0.04, 1, 1])
-    fig.savefig(output_path, format="svg", transparent=True, bbox_inches="tight")
-    plt.close(fig)
-    logger.info("Saved %s", output_path)
+
+def draw_rounded_card(
+    ax: plt.Axes,
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+    radius: float = 0.012,
+    facecolor: str = CARD_BG,
+    edgecolor: str = CARD_BORDER,
+    alpha: float = 0.96,
+) -> FancyBboxPatch:
+    """Draw a rounded dashboard card in axes coordinates."""
+    patch = FancyBboxPatch(
+        (x, y),
+        width,
+        height,
+        boxstyle=f"round,pad=0,rounding_size={radius}",
+        transform=ax.transAxes,
+        facecolor=facecolor,
+        edgecolor=edgecolor,
+        linewidth=1.0,
+        alpha=alpha,
+        clip_on=False,
+        zorder=1,
+    )
+    ax.add_patch(patch)
+    return patch
 
 
-def chart_horizontal_counts(
-    counts: dict[str, int],
-    order: list[str],
-    title: str,
-    output_path: Path,
-    xlabel: str = "Repositories",
+def draw_progress_bar(
+    ax: plt.Axes,
+    y: float,
+    fraction: float,
+    bar_left: float = 0.28,
+    bar_width: float = 0.52,
+    bar_height: float = 0.018,
+    label: str = "",
+    value_label: str = "",
 ) -> None:
-    """Generate a generic horizontal bar chart for count data."""
-    labels = [label for label in order if counts.get(label, 0) > 0]
-    values = [counts[label] for label in labels]
+    """Draw a thin horizontal progress bar with direct labels."""
+    track = FancyBboxPatch(
+        (bar_left, y - bar_height / 2),
+        bar_width,
+        bar_height,
+        boxstyle="round,pad=0,rounding_size=0.004",
+        transform=ax.transAxes,
+        facecolor=TRACK_BG,
+        edgecolor="none",
+        zorder=2,
+    )
+    ax.add_patch(track)
 
-    if not labels:
-        labels = ["No data"]
-        values = [0]
+    fill_width = max(bar_width * min(max(fraction, 0.0), 1.0), 0.001)
+    fill = FancyBboxPatch(
+        (bar_left, y - bar_height / 2),
+        fill_width,
+        bar_height,
+        boxstyle="round,pad=0,rounding_size=0.004",
+        transform=ax.transAxes,
+        facecolor=ACCENT,
+        edgecolor="none",
+        zorder=3,
+    )
+    ax.add_patch(fill)
 
-    fig, ax = plt.subplots(figsize=(9, max(3, len(labels) * 0.5 + 1.5)))
-    colors = [CHART_COLORS[i % len(CHART_COLORS)] for i in range(len(labels))]
-    bars = ax.barh(labels, values, color=colors, height=0.6)
-    apply_chart_style(ax, fig)
+    ax.text(
+        0.04,
+        y,
+        label,
+        transform=ax.transAxes,
+        ha="left",
+        va="center",
+        fontsize=10,
+        color=TEXT_PRIMARY,
+        zorder=4,
+    )
+    ax.text(
+        bar_left + bar_width + 0.02,
+        y,
+        value_label,
+        transform=ax.transAxes,
+        ha="left",
+        va="center",
+        fontsize=10,
+        color=TEXT_SECONDARY,
+        zorder=4,
+    )
 
-    ax.set_xlabel(xlabel)
-    ax.set_title(title, fontsize=14, fontweight="bold", pad=12)
-    ax.invert_yaxis()
 
-    for bar, val in zip(bars, values):
-        ax.text(
-            bar.get_width() + 0.05,
-            bar.get_y() + bar.get_height() / 2,
-            str(val),
-            va="center",
-            ha="left",
-            fontsize=10,
-            color=TEXT_COLOR,
-        )
+def new_dashboard_figure(width: float, height: float) -> tuple[plt.Figure, plt.Axes]:
+    """Create a transparent figure with a single axes, no chrome."""
+    configure_dashboard_fonts()
+    fig, ax = plt.subplots(figsize=(width, height))
+    fig.patch.set_alpha(0)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    ax.axis("off")
+    return fig, ax
 
-    plt.tight_layout()
-    fig.savefig(output_path, format="svg", transparent=True, bbox_inches="tight")
+
+def save_dashboard(fig: plt.Figure, output_path: Path) -> None:
+    """Save dashboard SVG with transparent background."""
+    fig.savefig(output_path, format="svg", transparent=True, bbox_inches="tight", pad_inches=0.08)
     plt.close(fig)
     logger.info("Saved %s", output_path)
 
 
-def chart_portfolio_summary(summary: dict[str, Any], repo_count: int, output_path: Path) -> None:
-    """Generate a compact card-style portfolio summary chart."""
-    fig, ax = plt.subplots(figsize=(9, 3.5))
-    fig.patch.set_alpha(0)
-    ax.patch.set_alpha(0)
-    ax.axis("off")
+def draw_portfolio_examples_footer(ax: plt.Axes) -> None:
+    """Add a clickable footer linking to the external project portfolio."""
+    footer = ax.text(
+        0.5,
+        0.015,
+        "Project examples → datascienceportfol.io/mina",
+        transform=ax.transAxes,
+        ha="center",
+        va="bottom",
+        fontsize=8,
+        color=ACCENT_LIGHT,
+        zorder=5,
+    )
+    footer.set_url(PORTFOLIO_EXAMPLES_URL)
 
-    metrics = [
-        ("Public Repositories Analyzed", str(repo_count)),
-        ("Agentic AI & Automation Projects", str(summary["agentic_or_automation_count"])),
-        ("Repositories with READMEs", str(summary["readme_count"])),
-        ("Repositories with GitHub Actions", str(summary["actions_count"])),
-        ("Most-Used Language", summary["most_used_language"]),
-        ("Average Maturity Score", f"{summary['avg_maturity_score']:.1f}"),
-    ]
 
-    ax.set_title(
-        "Portfolio Summary",
+def chart_impact_summary(output_path: Path) -> None:
+    """Generate wide KPI card with selected professional impact metrics."""
+    fig, ax = new_dashboard_figure(10, 3.2)
+    draw_rounded_card(ax, 0.02, 0.06, 0.96, 0.88)
+
+    ax.text(
+        0.05,
+        0.82,
+        "Selected Professional Impact",
+        transform=ax.transAxes,
         fontsize=14,
         fontweight="bold",
-        color=TEXT_COLOR,
-        pad=16,
-        loc="left",
+        color=TEXT_PRIMARY,
+        ha="left",
+        va="top",
+    )
+    ax.text(
+        0.05,
+        0.74,
+        "Representative program outcomes — not GitHub repository statistics",
+        transform=ax.transAxes,
+        fontsize=9,
+        color=TEXT_MUTED,
+        ha="left",
+        va="top",
     )
 
-    col_width = 0.48
-    row_height = 0.22
-    start_y = 0.72
+    cols = 3
+    rows = 2
+    card_w = 0.28
+    card_h = 0.24
+    start_x = 0.05
+    start_y = 0.58
+    x_gap = 0.03
+    y_gap = 0.04
 
-    for i, (label, value) in enumerate(metrics):
-        col = i % 2
-        row = i // 2
-        x = 0.02 + col * col_width
-        y = start_y - row * row_height
+    for index, (value, title, subtitle) in enumerate(IMPACT_METRICS):
+        col = index % cols
+        row = index // cols
+        x = start_x + col * (card_w + x_gap)
+        y = start_y - row * (card_h + y_gap)
 
-        ax.add_patch(
-            plt.Rectangle(
-                (x, y - 0.08),
-                col_width - 0.04,
-                row_height - 0.06,
-                fill=True,
-                facecolor="#f6f8fa",
-                edgecolor=GRID_COLOR,
-                linewidth=0.8,
-                alpha=0.35,
-                transform=ax.transAxes,
-                clip_on=False,
-            )
-        )
-
-        ax.text(
-            x + 0.02,
-            y + 0.04,
-            label,
-            transform=ax.transAxes,
-            fontsize=9,
-            color=SUBTITLE_COLOR,
-            va="top",
+        draw_rounded_card(
+            ax,
+            x,
+            y,
+            card_w,
+            card_h,
+            radius=0.008,
+            facecolor=PROGRESS_BG,
+            edgecolor=CARD_BORDER,
+            alpha=0.9,
         )
         ax.text(
-            x + 0.02,
-            y - 0.02,
+            x + 0.03,
+            y + card_h - 0.05,
             value,
             transform=ax.transAxes,
-            fontsize=13,
+            fontsize=18,
             fontweight="bold",
-            color=TEXT_COLOR,
+            color=ACCENT_LIGHT,
+            ha="left",
             va="top",
         )
+        ax.text(
+            x + 0.03,
+            y + card_h - 0.13,
+            title,
+            transform=ax.transAxes,
+            fontsize=10,
+            fontweight="bold",
+            color=TEXT_PRIMARY,
+            ha="left",
+            va="top",
+        )
+        ax.text(
+            x + 0.03,
+            y + 0.04,
+            subtitle,
+            transform=ax.transAxes,
+            fontsize=8,
+            color=TEXT_SECONDARY,
+            ha="left",
+            va="bottom",
+        )
 
-    plt.tight_layout()
-    fig.savefig(output_path, format="svg", transparent=True, bbox_inches="tight")
-    plt.close(fig)
-    logger.info("Saved %s", output_path)
+    save_dashboard(fig, output_path)
+
+
+def chart_project_focus(summary: dict[str, Any], output_path: Path) -> None:
+    """Generate compact horizontal progress bars for top project categories."""
+    items = top_n_with_other(summary["category_counts"], CATEGORY_ORDER)
+    total = sum(value for _, value in items) or 1
+    row_count = max(len(items), 1)
+    fig, ax = new_dashboard_figure(10, 1.8 + row_count * 0.55)
+
+    draw_rounded_card(ax, 0.02, 0.04, 0.96, 0.92)
+    ax.text(
+        0.05,
+        0.9,
+        "Project Focus",
+        transform=ax.transAxes,
+        fontsize=14,
+        fontweight="bold",
+        color=TEXT_PRIMARY,
+        ha="left",
+    )
+    ax.text(
+        0.05,
+        0.82,
+        "Public repository distribution by category",
+        transform=ax.transAxes,
+        fontsize=9,
+        color=TEXT_MUTED,
+        ha="left",
+    )
+
+    start_y = 0.68
+    row_step = 0.12
+    short_labels = {
+        "Agentic AI Workflows": "Agentic AI",
+        "Automation & APIs": "Automation & APIs",
+        "Data & Analytics": "Data & Analytics",
+        "Developer Tools": "Developer Tools",
+        "Web Applications": "Web Apps",
+        "Learning & Experiments": "Learning",
+    }
+
+    for index, (label, count) in enumerate(items):
+        pct = 100.0 * count / total
+        draw_progress_bar(
+            ax,
+            y=start_y - index * row_step,
+            fraction=pct / 100.0,
+            label=short_labels.get(label, label),
+            value_label=f"{pct:.0f}%  ({count})",
+        )
+
+    draw_portfolio_examples_footer(ax)
+    save_dashboard(fig, output_path)
+
+
+def chart_technology_mix(summary: dict[str, Any], output_path: Path) -> None:
+    """Generate capability-grouped technology mix as a segmented bar."""
+    items = top_n_with_other(summary["capability_counts"], CAPABILITY_ORDER)
+    total = sum(value for _, value in items) or 1
+    fig, ax = new_dashboard_figure(10, 3.0)
+
+    draw_rounded_card(ax, 0.02, 0.06, 0.96, 0.88)
+    ax.text(
+        0.05,
+        0.82,
+        "Technology Mix",
+        transform=ax.transAxes,
+        fontsize=14,
+        fontweight="bold",
+        color=TEXT_PRIMARY,
+        ha="left",
+    )
+    ax.text(
+        0.05,
+        0.74,
+        "Grouped by capability using repository metadata and topics",
+        transform=ax.transAxes,
+        fontsize=9,
+        color=TEXT_MUTED,
+        ha="left",
+    )
+
+    bar_left = 0.05
+    bar_width = 0.9
+    bar_y = 0.58
+    bar_height = 0.045
+    cursor = bar_left
+
+    for index, (label, count) in enumerate(items):
+        fraction = count / total
+        segment_width = bar_width * fraction
+        if segment_width <= 0:
+            continue
+        shade = ACCENT if index == 0 else ACCENT_LIGHT
+        alpha = 1.0 - (index * 0.08)
+        segment = FancyBboxPatch(
+            (cursor, bar_y),
+            segment_width,
+            bar_height,
+            boxstyle="round,pad=0,rounding_size=0.003",
+            transform=ax.transAxes,
+            facecolor=shade,
+            edgecolor="none",
+            alpha=max(alpha, 0.45),
+            zorder=3,
+        )
+        ax.add_patch(segment)
+        cursor += segment_width
+
+    label_y = 0.42
+    label_step = 0.11
+    for index, (label, count) in enumerate(items):
+        pct = 100.0 * count / total
+        y = label_y - index * label_step
+        ax.plot(
+            [0.05, 0.07],
+            [y, y],
+            transform=ax.transAxes,
+            color=ACCENT if index == 0 else ACCENT_LIGHT,
+            linewidth=3,
+            solid_capstyle="round",
+            zorder=4,
+        )
+        ax.text(
+            0.08,
+            y,
+            f"{label}  ·  {pct:.0f}% ({count})",
+            transform=ax.transAxes,
+            fontsize=10,
+            color=TEXT_PRIMARY,
+            va="center",
+            ha="left",
+        )
+
+    draw_portfolio_examples_footer(ax)
+    save_dashboard(fig, output_path)
 
 
 def generate_charts(data: dict[str, Any]) -> None:
-    """Generate all SVG chart assets."""
+    """Generate all dashboard SVG assets."""
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
-    repos = data["repos"]
     summary = data["summary"]
 
-    chart_language_distribution(repos, ASSETS_DIR / "language_distribution.svg")
+    chart_impact_summary(ASSETS_DIR / "impact_summary.svg")
+    chart_project_focus(summary, ASSETS_DIR / "project_focus.svg")
+    chart_technology_mix(summary, ASSETS_DIR / "technology_mix.svg")
 
-    chart_horizontal_counts(
-        summary["category_counts"],
-        CATEGORY_ORDER,
-        "Project Focus",
-        ASSETS_DIR / "project_focus.svg",
-    )
-
-    chart_horizontal_counts(
-        summary["maturity_counts"],
-        MATURITY_LABELS,
-        "Project Maturity",
-        ASSETS_DIR / "repo_maturity.svg",
-    )
-
-    chart_portfolio_summary(summary, data["repo_count"], ASSETS_DIR / "portfolio_summary.svg")
+    legacy_files = [
+        "portfolio_summary.svg",
+        "language_distribution.svg",
+        "repo_maturity.svg",
+        "repository_activity.svg",
+    ]
+    for legacy in legacy_files:
+        legacy_path = ASSETS_DIR / legacy
+        if legacy_path.exists():
+            legacy_path.unlink()
+            logger.info("Removed legacy asset %s", legacy_path)
 
 
 # ---------------------------------------------------------------------------

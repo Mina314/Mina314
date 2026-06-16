@@ -1,91 +1,99 @@
+<div align="center">
+
 # Hi, I'm Mina 👋
 
-### Senior Technical Program Manager building agentic AI workflows, internal tools, and operational intelligence systems
+### Technical Program Manager building agentic workflows and AI-powered operational systems
 
-I work at the intersection of **technical program management**, **agentic AI workflows**, **workflow automation**, **developer productivity**, **data systems**, and **operational intelligence**.
+I design workflows that connect **AI, APIs, automation, data, and human review** to help engineering teams move faster and make better decisions.
 
-My focus is turning ambiguous, repetitive, and high-stakes processes into scalable systems—combining APIs, AI-assisted classification, workflow orchestration, human-in-the-loop review, risk scoring, owner routing, SLA tracking, dashboards, and alerts with clear escalation paths.
+[LinkedIn](https://www.linkedin.com/in/mina-liu-114200/) · [Email](mailto:minazliu@gmail.com)
 
-I partner closely with engineering, infrastructure, and program leadership to reduce operational drag, improve signal quality, and make execution visible before it becomes a crisis.
+</div>
+
+---
+
+## Impact
+
+<p align="center">
+  <img src="./assets/impact_summary.svg" width="100%" alt="Selected program impact">
+</p>
 
 ---
 
 ## What I Build
 
-### Agentic Workflow Systems
+<table>
+<tr>
+<td width="33%" valign="top">
 
-Systems that combine LLM-assisted reasoning with structured workflows—routing work to the right owners, embedding human review at critical decision points, and maintaining audit trails across multi-step processes.
+### 🤖 Agentic Workflows
 
-### Operational Intelligence
+AI-assisted triage, classification, scoring, routing, and human approval.
 
-Dashboards, metrics pipelines, and alerting that surface execution risk early—connecting backlog health, incident patterns, pipeline reliability, and team-level trends into actionable views for program and engineering leaders.
+</td>
+<td width="33%" valign="top">
 
-### Developer and Program Automation
+### ⚡ Automation Systems
 
-Internal tools and integrations that eliminate manual coordination—connecting Jira, Slack, GitHub, and data sources through APIs, Apps Script, and orchestration platforms to keep programs moving without constant status chasing.
+GitHub, Jira, Slack, APIs, n8n, and Apps Script integrations.
 
-### Technical Program Systems
+</td>
+<td width="33%" valign="top">
 
-End-to-end program infrastructure: SLA tracking, escalation workflows, cross-team dependency visibility, and reporting frameworks that scale across many engineering teams without adding process overhead.
+### 📊 Operational Intelligence
 
----
+Dashboards and signals for risk, ownership, SLAs, incidents, and execution health.
 
-## Selected Experience
-
-- Reduced a high-priority engineering backlog by **62%** through workflow automation and AI-assisted triage
-- Improved **P0 response performance by 3x** with structured escalation and owner-routing systems
-- Built workflows supporting approximately **15 engineering teams** across infrastructure and platform programs
-- Surfaced more than **240 high-priority execution risks** before they impacted delivery timelines
-- Supported approximately **800 pipelines** and **28,000 daily CI jobs** with operational intelligence tooling
-- Reduced unknown infrastructure root-cause classifications from approximately **54–60% to 8%** through classification workflows and data enrichment
-- Supported infrastructure workflows across **more than 10 teams** with shared automation and reporting systems
+</td>
+</tr>
+</table>
 
 ---
 
-## Portfolio Analytics
+## Featured Projects
+
+Examples from my [data & analytics portfolio](https://www.datascienceportfol.io/mina):
+
+### [Uber Data Engineering](https://www.datascienceportfol.io/mina)
+
+End-to-end ETL with Python, Google Cloud, Mage.ai, BigQuery, and Looker for scalable data integration.
+
+`Python` `SQL` `Google Cloud` `BigQuery` `Looker`
+
+### [Real-time IoT Data Processing & Analytics](https://www.datascienceportfol.io/mina)
+
+Spark Streaming and Kafka pipeline for real-time operational data processing on AWS.
+
+`Python` `Apache Spark` `Kafka` `AWS`
+
+### [Interactive Analytics Dashboards](https://www.datascienceportfol.io/mina)
+
+Tableau dashboards for jobs, healthcare, and operational metrics with filtering and drill-down.
+
+`Tableau` `SQL` `PostgreSQL` `Data Visualization`
+
+---
+
+## Portfolio
 
 <p align="center">
-  <img src="./assets/portfolio_summary.svg" width="96%" alt="GitHub portfolio summary">
+  <img src="./assets/project_focus.svg" width="49%" alt="Project focus">
+  <img src="./assets/technology_mix.svg" width="49%" alt="Technology mix">
 </p>
 
-<p align="center">
-  <img src="./assets/project_focus.svg" width="47%" alt="Project focus">
-  <img src="./assets/repo_maturity.svg" width="47%" alt="Repository maturity">
-</p>
-
-<p align="center">
-  <img src="./assets/language_distribution.svg" width="96%" alt="Language distribution">
-</p>
-
-> These analytics are generated from my public repositories using the GitHub API and refreshed automatically with GitHub Actions.
+<sub>Automatically generated from my public repositories using the GitHub API and GitHub Actions. · [View project examples →](https://www.datascienceportfol.io/mina)</sub>
 
 ---
 
-## Tools
+## Toolkit
 
-**Languages & Scripting**
-Python · SQL · JavaScript · Google Apps Script
-
-**Data & Business Intelligence**
-Pandas · PostgreSQL · Airflow · Superset · Looker Studio · Tableau · Grafana · Prometheus
-
-**Integrations & Automation**
-GitHub API · Jira API · Slack integrations · n8n · GitHub Actions
-
----
-
-## Current Focus
-
-- Practical agentic workflows with human-in-the-loop guardrails
-- Engineering risk triage and AI-assisted classification
-- Workflow orchestration across tools and teams
-- Operational intelligence and execution visibility
-- Developer productivity through internal tooling
-- AI-assisted internal tools that reduce coordination overhead
-
----
-
-## Connect
-
-- LinkedIn: https://www.linkedin.com/in/mina-liu-114200/
-- Email: minazliu@gmail.com
+<p>
+  <img src="https://img.shields.io/badge/AI-LLM%20Workflows-6E56CF?style=flat-square">
+  <img src="https://img.shields.io/badge/Automation-n8n-EA4B71?style=flat-square">
+  <img src="https://img.shields.io/badge/Code-Python-3776AB?style=flat-square">
+  <img src="https://img.shields.io/badge/Data-SQL-4479A1?style=flat-square">
+  <img src="https://img.shields.io/badge/API-GitHub-181717?style=flat-square">
+  <img src="https://img.shields.io/badge/Platform-Jira-0052CC?style=flat-square">
+  <img src="https://img.shields.io/badge/Workflow-Slack-4A154B?style=flat-square">
+  <img src="https://img.shields.io/badge/BI-Grafana-F46800?style=flat-square">
+</p>
