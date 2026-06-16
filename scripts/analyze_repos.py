@@ -133,9 +133,14 @@ def fetch_activity(s: requests.Session) -> list[dict[str, str]]:
         detail = ""
 
         if event_type == "PushEvent":
-            count = len(payload.get("commits", []))
+            count = payload.get("distinct_size") or payload.get("size")
+
             action = f"Pushed to {repo}"
-            detail = f"{count} commit{'s' if count != 1 else ''}"
+
+            if count is None:
+                detail = "Updated repository"
+            else:
+                detail = f"{count} commit{'s' if count != 1 else ''}"
         elif event_type == "PullRequestEvent":
             action = f"{payload.get('action', 'Updated').capitalize()} pull request in {repo}"
             detail = payload.get("pull_request", {}).get("title", "")
