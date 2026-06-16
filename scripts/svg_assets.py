@@ -373,7 +373,13 @@ def generate_insights(data, theme):
         ("Repositories", str(data.get("repo_count", 0)), "public, non-archived"),
         ("Commits", str(contributions.get("commits")) if contributions.get("commits") is not None else "N/A", "last 12 months"),
         ("Top Language", data.get("top_language", "N/A"), "by GitHub language bytes"),
-        ("Longest Streak", f"{contributions.get('longest_streak')} days" if contributions.get("longest_streak") is not None else "N/A", "last 12 months"),
+        (
+            "Longest Streak",
+            f"{contributions.get('longest_streak')} days"
+            if contributions.get("longest_streak") is not None
+            else "N/A",
+            "all-time contribution activity",
+        )
     ]
     body = [
         box(8, 8, 944, 246, 22, f"url(#{uid}-bg)", theme.border),

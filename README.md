@@ -66,7 +66,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/activity_dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./assets/activity_light.svg">
-    <img src="./assets/activity_dark.svg" width="100%" alt="Recent public GitHub activity">
+    <img src="./assets/activity_dark.svg?v=3" width="100%" alt="Recent public GitHub activity">
   </picture>
 </p>
 

@@ -61,13 +61,35 @@ def fetch_languages(s: requests.Session, name: str) -> dict[str, int]:
     r.raise_for_status()
     return r.json()
 
-
 def fetch_contributions(s: requests.Session) -> dict[str, Any]:
+    """
+    Return:
+    - commits: recognized commit contributions during the last 12 months
+    - longest_streak: longest contribution streak across all available history
+    """
     if "Authorization" not in s.headers:
-        return {"commits": None, "longest_streak": None}
+        return {
+            "commits": None,
+            "longest_streak": None,
+        }
 
-    end = datetime.now(timezone.utc)
-    start = end - timedelta(days=365)
+    now = datetime.now(timezone.utc)
+
+    # Get the account creation date so we know where to begin.
+    user_response = s.get(
+        f"{API}/users/{USERNAME}",
+        timeout=30,
+    )
+    user_response.raise_for_status()
+
+    created_at_value = user_response.json().get("created_at")
+    if not created_at_value:
+        account_created_at = now - timedelta(days=365)
+    else:
+        account_created_at = datetime.fromisoformat(
+            created_at_value.replace("Z", "+00:00")
+        )
+
     query = """
     query($login: String!, $from: DateTime!, $to: DateTime!) {
       user(login: $login) {
@@ -85,38 +107,112 @@ def fetch_contributions(s: requests.Session) -> dict[str, Any]:
       }
     }
     """
-    r = s.post(
-        GRAPHQL,
-        json={
-            "query": query,
-            "variables": {"login": USERNAME, "from": start.isoformat(), "to": end.isoformat()},
-        },
-        timeout=30,
-    )
-    r.raise_for_status()
-    payload = r.json()
-    if payload.get("errors"):
-        raise RuntimeError(payload["errors"])
 
-    collection = payload["data"]["user"]["contributionsCollection"]
-    days = [
-        d
-        for week in collection["contributionCalendar"]["weeks"]
-        for d in week["contributionDays"]
+    def query_period(
+        period_start: datetime,
+        period_end: datetime,
+    ) -> dict[str, Any]:
+        response = s.post(
+            GRAPHQL,
+            json={
+                "query": query,
+                "variables": {
+                    "login": USERNAME,
+                    "from": period_start.isoformat(),
+                    "to": period_end.isoformat(),
+                },
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+
+        payload = response.json()
+
+        if payload.get("errors"):
+            raise RuntimeError(payload["errors"])
+
+        user = payload.get("data", {}).get("user")
+        if not user:
+            raise RuntimeError(
+                f"GitHub user {USERNAME} was not returned by GraphQL."
+            )
+
+        return user["contributionsCollection"]
+
+    # Commit count for the most recent 12 months.
+    last_year_start = now - timedelta(days=365)
+    recent_collection = query_period(
+        last_year_start,
+        now,
+    )
+    commits_last_12_months = recent_collection[
+        "totalCommitContributions"
     ]
 
-    longest = 0
-    current = 0
-    for day in sorted(days, key=lambda x: x["date"]):
-        if day["contributionCount"] > 0:
-            current += 1
-            longest = max(longest, current)
+    # Collect daily contribution counts across the account's history.
+    contribution_days: dict[str, int] = {}
+
+    window_start = account_created_at
+
+    while window_start < now:
+        # Keep each GraphQL contribution window under one year.
+        window_end = min(
+            window_start + timedelta(days=364),
+            now,
+        )
+
+        collection = query_period(
+            window_start,
+            window_end,
+        )
+
+        for week in collection["contributionCalendar"]["weeks"]:
+            for day in week["contributionDays"]:
+                day_date = day["date"]
+
+                # Protect against any overlapping boundary dates.
+                contribution_days[day_date] = max(
+                    contribution_days.get(day_date, 0),
+                    day["contributionCount"],
+                )
+
+        window_start = window_end + timedelta(days=1)
+
+    # Calculate the longest all-time consecutive-day streak.
+    longest_streak = 0
+    current_streak = 0
+    previous_date = None
+
+    for date_string in sorted(contribution_days):
+        current_date = datetime.strptime(
+            date_string,
+            "%Y-%m-%d",
+        ).date()
+
+        count = contribution_days[date_string]
+
+        if count <= 0:
+            current_streak = 0
+            previous_date = current_date
+            continue
+
+        if (
+            previous_date is not None
+            and current_date == previous_date + timedelta(days=1)
+        ):
+            current_streak += 1
         else:
-            current = 0
+            current_streak = 1
+
+        longest_streak = max(
+            longest_streak,
+            current_streak,
+        )
+        previous_date = current_date
 
     return {
-        "commits": collection["totalCommitContributions"],
-        "longest_streak": longest,
+        "commits": commits_last_12_months,
+        "longest_streak": longest_streak,
     }
 
 def fetch_push_details(
