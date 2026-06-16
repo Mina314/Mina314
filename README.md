@@ -56,14 +56,14 @@
   <picture>
     <source
       media="(prefers-color-scheme: dark)"
-      srcset="./assets/insights_activity_dark.svg?v=2"
+      srcset="./assets/insights_activity_dark.svg?v=3"
     >
     <source
       media="(prefers-color-scheme: light)"
-      srcset="./assets/insights_activity_light.svg?v=2"
+      srcset="./assets/insights_activity_light.svg?v=3"
     >
     <img
-      src="./assets/insights_activity_dark.svg?v=2"
+      src="./assets/insights_activity_dark.svg?v=3"
       width="100%"
       alt="GitHub portfolio insights, language distribution, and recent activity"
     >

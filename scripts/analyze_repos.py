@@ -512,7 +512,7 @@ def main() -> None:
             reverse=True,
         )
 
-        top_languages = sorted_languages[:4]
+        top_languages = sorted_languages
 
 
         for language, amount in top_languages:

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T05:32:15.050994+00:00",
+  "generated_at": "2026-06-16T05:34:17.194233+00:00",
   "username": "Mina314",
   "repo_count": 15,
   "language_count": 6,
@@ -7,7 +7,7 @@
   "language_distribution": [
     {
       "name": "Python",
-      "bytes": 9220384,
+      "bytes": 9219901,
       "percentage": 99.1
     },
     {
@@ -24,6 +24,16 @@
       "name": "CSS",
       "bytes": 14587,
       "percentage": 0.2
+    },
+    {
+      "name": "HTML",
+      "bytes": 6931,
+      "percentage": 0.1
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 5960,
+      "percentage": 0.1
     }
   ],
   "repositories": [
@@ -32,9 +42,9 @@
       "url": "https://github.com/Mina314/Mina314",
       "description": null,
       "languages": {
-        "Python": 39972
+        "Python": 39489
       },
-      "pushed_at": "2026-06-16T05:29:17Z"
+      "pushed_at": "2026-06-16T05:32:49Z"
     },
     {
       "name": "uber_data_engineering",
@@ -160,15 +170,15 @@
     }
   ],
   "contributions": {
-    "commits": 21,
+    "commits": 22,
     "longest_streak": 5,
-    "commits_current_month": 21
+    "commits_current_month": 22
   },
   "activity": [
     {
       "action": "Updated Mina314",
-      "detail": "21 commits this month \u00b7 Latest: Improve language insights and dashboard layout",
-      "created_at": "2026-06-16T05:29:18Z"
+      "detail": "22 commits this month \u00b7 Latest: Show all portfolio languages",
+      "created_at": "2026-06-16T05:32:49Z"
     },
     {
       "action": "Created branch in Mina314",
