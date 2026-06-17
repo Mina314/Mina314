@@ -113,14 +113,14 @@ def generate_intro(theme):
             8,
             8,
             944,
-            430,
+            360,
             26,
             f"url(#{uid}-bg)",
             theme.border,
             1.5,
         ),
         (
-            f'<rect x="8" y="8" width="944" height="430" rx="26" '
+            f'<rect x="8" y="8" width="944" height="360" rx="26" '
             f'fill="url(#{uid}-glow)"/>'
         ),
 
@@ -181,7 +181,7 @@ def generate_intro(theme):
         body.extend([
             box(
                 x,
-                292,
+                278,
                 width,
                 34,
                 17,
@@ -190,7 +190,7 @@ def generate_intro(theme):
             ),
             txt(
                 x + width / 2,
-                314,
+                300,
                 label,
                 12,
                 theme.secondary,
@@ -302,7 +302,7 @@ def generate_intro(theme):
 
     return render_svg(
         960,
-        446,
+        376,
         d,
         "\n".join(body),
     )

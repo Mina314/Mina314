@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 446" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 376" role="img">
 <defs><linearGradient id="intro-dark-bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#07111f"/><stop offset="100%" stop-color="#0b1727"/></linearGradient><linearGradient id="intro-dark-accent" x1="0" x2="1"><stop offset="0%" stop-color="#4ea1ff"/><stop offset="100%" stop-color="#9b6cff"/></linearGradient><radialGradient id="intro-dark-glow" cx="78%" cy="42%" r="48%"><stop offset="0%" stop-color="#4ea1ff" stop-opacity=".16"/><stop offset="100%" stop-color="#4ea1ff" stop-opacity="0"/></radialGradient></defs>
-<rect x="8" y="8" width="944" height="430" rx="26" fill="url(#intro-dark-bg)" stroke="#223651" stroke-width="1.5"/>
-<rect x="8" y="8" width="944" height="430" rx="26" fill="url(#intro-dark-glow)"/>
+<rect x="8" y="8" width="944" height="360" rx="26" fill="url(#intro-dark-bg)" stroke="#223651" stroke-width="1.5"/>
+<rect x="8" y="8" width="944" height="360" rx="26" fill="url(#intro-dark-glow)"/>
 <text x="52" y="82" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#f3f7ff">Hi, I’m <tspan font-weight="800" fill="url(#intro-dark-accent)">Mina.</tspan></text>
 <text x="52" y="138" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="35" font-weight="700" fill="#f3f7ff" text-anchor="start">I build agentic workflows and</text>
 <text x="52" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="35" font-weight="700" fill="#f3f7ff" text-anchor="start">AI-powered operational systems.</text>
 <text x="52" y="229" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="400" fill="#a8b5c8" text-anchor="start">Connecting AI, APIs, automation, data, and human review</text>
 <text x="52" y="254" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="16" font-weight="400" fill="#a8b5c8" text-anchor="start">to turn operational complexity into clear, reviewable action.</text>
-<rect x="52" y="292" width="104" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
-<text x="104.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">AI Systems</text>
-<rect x="168" y="292" width="164" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
-<text x="250.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Workflow Automation</text>
-<rect x="344" y="292" width="190" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
-<text x="439.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Operational Intelligence</text>
-<rect x="546" y="292" width="160" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
-<text x="626.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Human-in-the-loop</text>
+<rect x="52" y="278" width="104" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="104.0" y="300" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">AI Systems</text>
+<rect x="168" y="278" width="164" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="250.0" y="300" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Workflow Automation</text>
+<rect x="344" y="278" width="190" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="439.0" y="300" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Operational Intelligence</text>
+<rect x="546" y="278" width="160" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
+<text x="626.0" y="300" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Human-in-the-loop</text>
 <rect x="720" y="92" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
 <rect x="734" y="107" width="28" height="28" rx="8" fill="#4ea1ff" stroke="#4ea1ff" stroke-width="1"/>
 <text x="748" y="126" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">1</text>
