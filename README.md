@@ -12,23 +12,131 @@
 <tr>
 <td width="33%" valign="top">
 <a href="https://github.com/minazliu?tab=repositories">
-  <img src="./assets/focus_agentic_dark.svg" width="100%" alt="Agentic Workflows">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/focus_agentic_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/focus_agentic_light.svg"
+    >
+    <img
+      src="./assets/focus_agentic_light.svg"
+      width="100%"
+      alt="Agentic Workflows"
+    >
+  </picture>
 </a>
 </td>
+
 <td width="33%" valign="top">
 <a href="https://github.com/minazliu?tab=repositories">
-  <img src="./assets/focus_automation_dark.svg" width="100%" alt="Automation Systems">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/focus_automation_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/focus_automation_light.svg"
+    >
+    <img
+      src="./assets/focus_automation_light.svg"
+      width="100%"
+      alt="Automation Systems"
+    >
+  </picture>
 </a>
 </td>
+
 <td width="33%" valign="top">
 <a href="https://www.datascienceportfol.io/mina">
-  <img src="./assets/focus_intelligence_dark.svg" width="100%" alt="Operational Intelligence">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/focus_intelligence_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/focus_intelligence_light.svg"
+    >
+    <img
+      src="./assets/focus_intelligence_light.svg"
+      width="100%"
+      alt="Operational Intelligence"
+    >
+  </picture>
 </a>
 </td>
 </tr>
 </table>
 
 ## Selected Projects
+
+<table>
+<tr>
+<td width="33%" valign="top">
+<a href="https://github.com/minazliu/minazliu">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/project_portfolio_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/project_portfolio_light.svg"
+    >
+    <img
+      src="./assets/project_portfolio_light.svg"
+      width="100%"
+      alt="GitHub Portfolio Intelligence — Live"
+    >
+  </picture>
+</a>
+</td>
+
+<td width="33%" valign="top">
+<a href="https://github.com/minazliu?tab=repositories">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/project_triage_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/project_triage_light.svg"
+    >
+    <img
+      src="./assets/project_triage_light.svg"
+      width="100%"
+      alt="Agentic Issue Triage — In development"
+    >
+  </picture>
+</a>
+</td>
+
+<td width="33%" valign="top">
+<a href="https://github.com/minazliu?tab=repositories">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="./assets/project_patterns_dark.svg"
+    >
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="./assets/project_patterns_light.svg"
+    >
+    <img
+      src="./assets/project_patterns_light.svg"
+      width="100%"
+      alt="Workflow Patterns — Planned"
+    >
+  </picture>
+</a>
+</td>
+</tr>
+</table>
 
 <table>
 <tr>
