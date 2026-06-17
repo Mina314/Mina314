@@ -16,23 +16,23 @@
 <text x="439.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Operational Intelligence</text>
 <rect x="546" y="292" width="160" height="34" rx="17" fill="#101f32" stroke="#223651" stroke-width="1"/>
 <text x="626.0" y="314" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#a8b5c8" text-anchor="middle">Human-in-the-loop</text>
-<rect x="700" y="92" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
-<rect x="714" y="107" width="28" height="28" rx="8" fill="#4ea1ff" stroke="#4ea1ff" stroke-width="1"/>
-<text x="728" y="126" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">1</text>
-<text x="754" y="116" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">AI Signals</text>
-<text x="754" y="135" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Summarize &amp; classify</text>
-<line x1="810.0" y1="155" x2="810.0" y2="170" stroke="#223651" stroke-width="2"/>
-<path d="M 806.0 165 L 810.0 170 L 814.0 165" fill="none" stroke="#223651" stroke-width="2"/>
-<rect x="700" y="178" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
-<rect x="714" y="193" width="28" height="28" rx="8" fill="#9b6cff" stroke="#9b6cff" stroke-width="1"/>
-<text x="728" y="212" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">2</text>
-<text x="754" y="202" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">Orchestration</text>
-<text x="754" y="221" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Prioritize, route &amp; track</text>
-<line x1="810.0" y1="241" x2="810.0" y2="256" stroke="#223651" stroke-width="2"/>
-<path d="M 806.0 251 L 810.0 256 L 814.0 251" fill="none" stroke="#223651" stroke-width="2"/>
-<rect x="700" y="264" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
-<rect x="714" y="279" width="28" height="28" rx="8" fill="#49d5e7" stroke="#49d5e7" stroke-width="1"/>
-<text x="728" y="298" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">3</text>
-<text x="754" y="288" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">Human Decisions</text>
-<text x="754" y="307" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Review, escalate &amp; deliver</text>
+<rect x="720" y="92" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
+<rect x="734" y="107" width="28" height="28" rx="8" fill="#4ea1ff" stroke="#4ea1ff" stroke-width="1"/>
+<text x="748" y="126" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">1</text>
+<text x="774" y="116" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">AI Signals</text>
+<text x="774" y="135" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Summarize &amp; classify</text>
+<line x1="830.0" y1="155" x2="830.0" y2="170" stroke="#223651" stroke-width="2"/>
+<path d="M 826.0 165 L 830.0 170 L 834.0 165" fill="none" stroke="#223651" stroke-width="2"/>
+<rect x="720" y="178" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
+<rect x="734" y="193" width="28" height="28" rx="8" fill="#9b6cff" stroke="#9b6cff" stroke-width="1"/>
+<text x="748" y="212" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">2</text>
+<text x="774" y="202" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">Orchestration</text>
+<text x="774" y="221" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Prioritize, route &amp; track</text>
+<line x1="830.0" y1="241" x2="830.0" y2="256" stroke="#223651" stroke-width="2"/>
+<path d="M 826.0 251 L 830.0 256 L 834.0 251" fill="none" stroke="#223651" stroke-width="2"/>
+<rect x="720" y="264" width="220" height="58" rx="14" fill="#101f32" stroke="#223651" stroke-width="1.5"/>
+<rect x="734" y="279" width="28" height="28" rx="8" fill="#49d5e7" stroke="#49d5e7" stroke-width="1"/>
+<text x="748" y="298" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#07111f" text-anchor="middle">3</text>
+<text x="774" y="288" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="14" font-weight="750" fill="#f3f7ff" text-anchor="start">Human Decisions</text>
+<text x="774" y="307" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="9" font-weight="500" fill="#a8b5c8" text-anchor="start">Review, escalate &amp; deliver</text>
 </svg>

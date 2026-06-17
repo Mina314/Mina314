@@ -200,7 +200,7 @@ def generate_intro(theme):
         ])
 
     # Clean AI workflow illustration on the right.
-    diagram_x = 700
+    diagram_x = 720
     card_width = 220
     card_height = 58
 
