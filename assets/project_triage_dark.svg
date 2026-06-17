@@ -5,8 +5,8 @@
 <rect x="22" y="22" width="50" height="50" rx="13" fill="#101f32" stroke="#223651" stroke-width="1"/>
 <rect x="25" y="31" width="44" height="34" rx="10" fill="none" stroke="#49d5e7" stroke-width="2"/><circle cx="39" cy="48" r="3" fill="#49d5e7"/><circle cx="55" cy="48" r="3" fill="#49d5e7"/>
 <text x="22" y="112" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="18" font-weight="750" fill="#f3f7ff" text-anchor="start">Agentic Issue Triage</text>
-<rect x="22" y="130" width="113" height="24" rx="12.0" fill="#101f32" stroke="#4ea1ff" stroke-width="1.5"/>
-<text x="78.5" y="146.5" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="800" fill="#4ea1ff" text-anchor="middle">IN DEVELOPMENT</text>
+<rect x="22" y="130" width="51" height="24" rx="12.0" fill="#101f32" stroke="#31c48d" stroke-width="1.5"/>
+<text x="47.5" y="146.5" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="800" fill="#31c48d" text-anchor="middle">LIVE</text>
 <text x="22" y="184" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="400" fill="#a8b5c8" text-anchor="start">Issue summaries, risk scoring,</text>
 <text x="22" y="207" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="13" font-weight="400" fill="#a8b5c8" text-anchor="start">routing, and human review.</text>
 <text x="22" y="242" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="12" font-weight="600" fill="#71829b" text-anchor="start">Agentic AI · Workflow</text>
